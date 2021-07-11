@@ -37,8 +37,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Fade: 1
+    - _Fade: 0.633
     - _Scale: 67
     m_Colors:
-    - _Color: {r: 4.907155, g: 3.2117145, b: 0, a: 1}
+    - _Color: {r: 1.7782512, g: 1.1781828, b: 0, a: 1}
   m_BuildTextureStacks: []
