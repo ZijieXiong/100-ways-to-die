@@ -46,13 +46,30 @@ public class GameManager : MonoBehaviour
         File.WriteAllText(dir + fileName, json);
     }
 
+
+    string Load()
+    {
+        string fullPath = Application.streamingAssetsPath + directory + fileName;
+        string res = "";
+        if(File.Exists(fullPath))
+        {
+            res = File.ReadAllText(fullPath);
+        }
+        return res;
+    }
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
         Library library = new Library();
         library.words.Add(new Word("fire"));
         string jsonString = JsonUtility.ToJson(new Word("fire"));
+        jsonString+= JsonUtility.ToJson(new Word("water"));
+        
         Save(jsonString);
+        Debug.Log(Load());
 
     }
 
