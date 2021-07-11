@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using System.Text;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,66 +10,104 @@ public class GameManager : MonoBehaviour
     {
         public string text;
         [SerializeField]
-        bool used = false;
+        int used = 0;
 
         public Word(string t){
             text = t;
         }
-    }
 
-    public class Library
-    {
-        public ArrayList words;
-
-        public Library(){
-            words = new ArrayList();
+        public Word(string t, int u){
+            text = t;
+            used = u;
         }
-        public Library(ArrayList newWords){
-            foreach (Word word in newWords)
-            {
-                words.Add(word);
-            }
+
+        public int ifUsed(){
+            return used;
         }
     }
 
     string directory = "/SaveData/";
     string fileName = "library.txt";
+    Hashtable library;
+    Hashtable bank;
+    Word question;
 
-    void Save(string json)
+    void Save(Hashtable library)
     {
         string dir = Application.streamingAssetsPath + directory;
-
+        string res = "";
         if(!Directory.Exists(dir)){
             Directory.CreateDirectory(dir);
         }
-        File.WriteAllText(dir + fileName, json);
+        foreach(string key in library.Keys){
+            //bool used = library[key];
+            Word word = new Word(key, (int)library[key]);
+            res += JsonUtility.ToJson(word) + '\n';
+        }
+        File.WriteAllText(dir + fileName, res);
     }
 
 
-    string Load()
+    void Load(Hashtable library)
     {
         string fullPath = Application.streamingAssetsPath + directory + fileName;
-        string res = "";
+        
         if(File.Exists(fullPath))
         {
-            res = File.ReadAllText(fullPath);
+            foreach (string line in File.ReadLines(fullPath)){
+                Word word = JsonUtility.FromJson<Word>(line);
+                library[word.text] = word.ifUsed();
+            }
         }
-        return res;
     }
 
-    
+    Hashtable GenerateBank(Hashtable library)
+    {
+        Hashtable bank = new Hashtable();
+        foreach(string key in library.Keys){
+            if((int)library[key] == 0){
+                bank[key] = (int)library[key];
+            }
+        }
+        return bank;
+    }
+
+    Word GenerateQuestion(Hashtable bank){
+        int rand = Random.Range(0, bank.Count);
+        int i = 0;
+        Word word = new Word("");
+        foreach(string key in bank.Keys){
+            if(i == rand){
+                word = new Word(key, (int)bank[key]);
+                return word;
+            }
+            i = i + 1;
+        }
+        return word;
+    }
+
+    bool Answer(string key){
+        if(library.ContainsKey(key)){
+            library[key] = (int)library[key] + 1;
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+
 
     // Start is called before the first frame update
     void Start()
     {
-        Library library = new Library();
-        library.words.Add(new Word("fire"));
-        string jsonString = JsonUtility.ToJson(new Word("fire"));
-        jsonString+= JsonUtility.ToJson(new Word("water"));
-        
-        Save(jsonString);
-        Debug.Log(Load());
-
+        library = new Hashtable();
+        Load(library);
+        bank = GenerateBank(library);
+        question = GenerateQuestion(bank);
+        Debug.Log(question.text);
+        //Answer("fire");
+        Save(library);
     }
 
     // Update is called once per frame
