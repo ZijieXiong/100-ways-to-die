@@ -3,19 +3,11 @@ fetchPreview = true
 wantsMore = false
 keepOpen = false
 queryFolder = "Assets"
-<<<<<<< HEAD
 onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
-	"last_search.785D90A9" = "sample"
-=======
-onBoardingDoNotAskAgain = false
-showPackageIndexes = false
-showStatusBar = false
-scopes = {
-	"last_search.785D90A9" = "tex"
->>>>>>> c583f225d7d49220a71057532654a1e60340ae49
+	"last_search.785D90A9" = "project set"
 	"InspectorPreview.785D90A9" = "0"
 	"currentGroup.785D90A9" = "all"
 }
@@ -57,11 +49,8 @@ providers = {
 	}
 }
 recentSearches = [
-<<<<<<< HEAD
-=======
-	"tex"
-	"texture"
->>>>>>> c583f225d7d49220a71057532654a1e60340ae49
+	"project set"
+	"project"
 ]
 searchItemFavorites = [
 ]
