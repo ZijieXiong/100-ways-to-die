@@ -1,2 +1,0 @@
-{"text":"water","used":0}
-{"text":"fire","used":1}

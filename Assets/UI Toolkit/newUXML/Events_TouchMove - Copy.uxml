@@ -1,9 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="/Assets/Samples/UI Toolkit/1.0.0-preview.14/UI Toolkit Examples/Resources/StyleSheets/Events_TouchMove.uss" />
-    <ui:VisualElement class="container" style="height: 100%; width: 100%; background-image: url(&apos;/Assets/Sprites/wall2.png&apos;);">
-        <ui:Label text="test" display-tooltip-when-elided="true" style="font-size: 50px; -unity-font-style: bold; color: rgba(0, 0, 0, 255);" />
-        <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); background-image: url(&apos;/Assets/Sprites/table2.png&apos;); height: 100%; top: 75px;">
-            <ui:VisualElement class="elem elem_1" style="background-image: url(&apos;/Assets/Sprites/star.png&apos;); background-color: rgba(56, 56, 56, 0); height: 495px; width: 100%; top: auto; left: auto;" />
-        </ui:VisualElement>
-    </ui:VisualElement>
-</ui:UXML>
