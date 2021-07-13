@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private int alphaToGen = 16;
+
     string directory = "/SaveData/";
     string fileName = "library.txt";
     Hashtable library;
@@ -95,8 +98,31 @@ public class GameManager : MonoBehaviour
             return false;
         }
 
-    }
+    }  
 
+    private char[] GenerateRandomAlpha(Word q)
+    {
+        char[] alphas = new char[alphaToGen];
+        string question = q.text;
+        for(int i = question.Length;i<alphaToGen;i++){
+            question += (char)('a'+Random.Range(0,26));
+        }
+        Debug.Log(question);
+        for(int i = 0;i < alphas.Length;i++)
+        {
+            alphas[i] = ' ';
+        }
+        for(int i = 0; i < alphas.Length;i++)
+        {
+            int r = Random.Range(0, alphaToGen);
+            while(alphas[r] != ' ')
+            {
+                r = Random.Range(0, alphaToGen);
+            }
+            alphas[r] = question[i];
+        }
+        return alphas;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -106,6 +132,7 @@ public class GameManager : MonoBehaviour
         bank = GenerateBank(library);
         question = GenerateQuestion(bank);
         Debug.Log(question.text);
+        char[] alphas = GenerateRandomAlpha(question);
         //Answer("fire");
         Save(library);
     }
