@@ -37,7 +37,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Fade: 0.743
+    - _Fade: 1
     - _Scale: 36.2
     m_Colors:
     - _Color: {r: 0.43053052, g: 0.2350314, b: 1.1072589, a: 1}
