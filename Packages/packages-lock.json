@@ -1,9 +1,9 @@
 {
   "dependencies": {
     "com.unity.2d.sprite": {
-      "version": "file:D:/GithubDesktop/clone/thief/Library/PackageCache/com.unity.2d.sprite@1.0.0",
+      "version": "1.0.0",
       "depth": 0,
-      "source": "local",
+      "source": "builtin",
       "dependencies": {}
     },
     "com.unity.collab-proxy": {
