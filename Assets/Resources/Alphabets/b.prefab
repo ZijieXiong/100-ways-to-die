@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4338238551738934466}
   - component: {fileID: 4741815667411300950}
   m_Layer: 0
-  m_Name: B
+  m_Name: b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,7 +109,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.02, y: 0.025}
+  m_Size: {x: 0.05, y: 0.05}
   m_EdgeRadius: 0
 --- !u!1 &5572795904809667986
 GameObject:
