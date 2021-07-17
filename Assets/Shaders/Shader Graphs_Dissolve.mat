@@ -152,7 +152,7 @@ Material:
     - _EMISSION_WEIGHT: 1
     - _EnableExternalAlpha: 0
     - _EnvironmentReflections: 1
-    - _Fade: 0.752
+    - _Fade: 0.991
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
