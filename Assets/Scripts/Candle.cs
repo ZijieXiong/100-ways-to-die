@@ -20,7 +20,7 @@ public class Slot : MonoBehaviour, IDropHandler
     public void OnDrop(PointerEventData eventData)
     {
         if(eventData.pointerDrag != null){
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+            eventData.pointerDrag.transform.position = transform.position;
         }
         Debug.Log("OnDrop");
     }

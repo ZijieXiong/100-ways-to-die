@@ -26,14 +26,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public float candleOffset = 5f;
+
     [SerializeField]
     private int alphaToGen = 16;
 
-    string directory = "/SaveData/";
-    string fileName = "library.txt";
-    Hashtable library;
-    Hashtable bank;
-    Word question;
+    private string directory = "/SaveData/";
+    private string fileName = "library.txt";
+    private GameObject[] candles;
+    private Hashtable library;
+    private Hashtable bank;
+    private Word question;
 
     void Save(Hashtable library)
     {
@@ -126,7 +129,10 @@ public class GameManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        GameObject instance = Instantiate(Resources.Load("Alphabets/A", typeof(GameObject))) as GameObject;
+        instance.GetComponent<Alphabet>().gm = this;
+        candles = GameObject.FindGameObjectsWithTag("candle");
         library = new Hashtable();
         Load(library);
         bank = GenerateBank(library);
@@ -135,6 +141,24 @@ public class GameManager : MonoBehaviour
         char[] alphas = GenerateRandomAlpha(question);
         //Answer("fire");
         Save(library);
+        
+    }
+
+    public void dropAlphabet(Alphabet alpha)
+    {
+        foreach(GameObject candle in candles)
+        {   
+            if(alpha.boxcollider.bounds.Intersects(candle.GetComponent<BoxCollider2D>().bounds))
+            {
+                Debug.Log("Lock in " + candle.name);
+                alpha.Lock();
+                GameObject child = candle.transform.GetChild(0).gameObject;
+                child.SetActive(true);
+                alpha.EliminateFire();
+                alpha.transform.position = new Vector3(candle.transform.position.x, candle.transform.position.y + candleOffset, candle.transform.position.z);
+                break;
+            }
+        }
     }
 
     // Update is called once per frame

@@ -3,45 +3,55 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Alphabet : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler, IPointerDownHandler
+public class Alphabet : MonoBehaviour
 {
-    [SerializeField]
-    bool drag;
-    [SerializeField]
-    Vector2 startPoint;
-    [SerializeField]
-    Vector2 endPoint;
-    [SerializeField]
-    private Canvas canvas;
-    private RectTransform dragRectTransform;
-    private CanvasGroup canvasGroup;
+    public GameManager gm;
+    public BoxCollider2D boxcollider;
+    private Vector3 screenPoint;
+    private Vector3 offset;
+    private bool isLocked = false;
+
+    public void Lock()
+    {
+        isLocked = true;
+    }
+
+    public void EliminateFire()
+    {
+        GameObject fire = transform.GetChild(0).gameObject;
+        fire.SetActive(false);
+    }
+
 
     void Start()
     {
-        dragRectTransform = GetComponent<RectTransform>();
-        canvasGroup = GetComponent<CanvasGroup>();
+        //boxcollider = GetComponent<BoxCollider2D>();
     }
-    void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
+
+    void OnMouseDown()
+    {
+        screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+
+    }
+
+
+    void OnMouseDrag()
     {   
-        canvasGroup.alpha = .6f;
-        canvasGroup.blocksRaycasts = false;
+        if(!isLocked)
+        {
+            Vector3 curPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+            curPos.z = 0f;
+            transform.position = curPos;
+        }
+        
     }
 
-    public void OnDrag(PointerEventData eventData)
-    {
-        dragRectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
-        Debug.Log("dragging");
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        canvasGroup.alpha = 1f;
-        canvasGroup.blocksRaycasts = true;
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-    Debug.Log("OnPointerDown");
+    void OnMouseUp()
+    {   
+        if(!isLocked)
+        {
+            gm.dropAlphabet(this);
+        }
     }
 
 
