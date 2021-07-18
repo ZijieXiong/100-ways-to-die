@@ -214,10 +214,14 @@ public class GameManager : MonoBehaviour
     {
         foreach(GameObject candle in candles)
         {   
-            if(alpha.boxcollider.bounds.Intersects(candle.GetComponent<BoxCollider2D>().bounds))
+            Candle candleScript = candle.GetComponent<Candle>();
+            if(alpha.boxcollider.bounds.Intersects(candle.GetComponent<BoxCollider2D>().bounds) && !candleScript.isLock)
             {
-                Debug.Log("Lock in " + candle.name);
+                candleScript.letter = alpha.GetLetter();
+                Debug.Log(candleScript.letter);
+                candleScript.isLock = true;
                 alpha.Lock();
+                alpha.gameObject.layer = 2;
                 GameObject child = candle.transform.GetChild(0).gameObject;
                 child.SetActive(true);
                 alpha.EliminateFire();

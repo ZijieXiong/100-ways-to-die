@@ -10,7 +10,8 @@ public class Alphabet : MonoBehaviour
     private Vector3 screenPoint;
     private Vector3 offset;
     private bool isLocked = false;
-
+    [SerializeField]
+    private string letter;
     public void Lock()
     {
         isLocked = true;
@@ -22,10 +23,12 @@ public class Alphabet : MonoBehaviour
         fire.SetActive(false);
     }
 
-
+    public string GetLetter()
+    {
+        return letter;
+    }
     void Start()
     {
-        //boxcollider = GetComponent<BoxCollider2D>();
     }
 
     void OnMouseDown()

@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
+  letter: f
   boxcollider: {fileID: 7943992945401558926}
 --- !u!1 &7108482441225848906
 GameObject:

@@ -209,3 +209,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
   boxcollider: {fileID: 3695258745034868068}
+  letter: t

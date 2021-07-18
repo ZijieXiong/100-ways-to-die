@@ -208,4 +208,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
+  letter: e
   boxcollider: {fileID: 3276925745584485588}

@@ -209,3 +209,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
   boxcollider: {fileID: 4423599815934442245}
+  letter: n

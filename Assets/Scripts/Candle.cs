@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class Slot : MonoBehaviour, IDropHandler
-{
+public class Candle : MonoBehaviour
+{   
+    public string letter = "";
+    public bool isLock = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,13 +16,5 @@ public class Slot : MonoBehaviour, IDropHandler
     void Update()
     {
         
-    }
-
-    public void OnDrop(PointerEventData eventData)
-    {
-        if(eventData.pointerDrag != null){
-            eventData.pointerDrag.transform.position = transform.position;
-        }
-        Debug.Log("OnDrop");
     }
 }

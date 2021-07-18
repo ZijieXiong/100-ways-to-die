@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3786028386017973712}
   - component: {fileID: 3786028386017973719}
   - component: {fileID: 3786028386017973718}
+  - component: {fileID: -167881282524531416}
   m_Layer: 2
   m_Name: Candle
   m_TagString: candle
@@ -111,6 +112,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
+--- !u!114 &-167881282524531416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3786028386017973717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6eed84608845c9449536823fb24927a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3786028386334332525
 GameObject:
   m_ObjectHideFlags: 0
