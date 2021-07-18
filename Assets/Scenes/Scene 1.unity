@@ -1802,7 +1802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   candleOffset: 0.2
-  alphaToGen: 16
+  alphaToGen: 8
 --- !u!4 &1111765915
 Transform:
   m_ObjectHideFlags: 0

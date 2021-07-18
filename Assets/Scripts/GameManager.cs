@@ -24,21 +24,45 @@ public class GameManager : MonoBehaviour
         public int ifUsed(){
             return used;
         }
+
+        public void Answer()
+        {
+            used += 1;
+        }
+    }
+
+    [System.Serializable]
+    public class Character
+    {
+        public string name;
+
+        public int questionLeft;
+
+        public Character(string n, int q)
+        {
+            name = n;
+            questionLeft = q;
+        }
+
     }
 
     public float candleOffset = 5f;
 
     [SerializeField]
-    private int alphaToGen = 16;
+    private int alphaToGen = 8;
 
     private string directory = "/SaveData/";
-    private string fileName = "library.txt";
+    private string stageFile = "Stages.txt";
+    private string fileName = "";
     private GameObject[] candles;
     private Hashtable library;
-    private Hashtable bank;
-    private Word question;
+    private Hashtable stages;
+    private Word curQuestion;
+    private Character curStage;
+    private char[] alphas;
 
-    void Save(Hashtable library)
+    //Save stage and current library into local files
+    void Save()
     {
         string dir = Application.streamingAssetsPath + directory;
         string res = "";
@@ -46,15 +70,35 @@ public class GameManager : MonoBehaviour
             Directory.CreateDirectory(dir);
         }
         foreach(string key in library.Keys){
-            //bool used = library[key];
             Word word = new Word(key, (int)library[key]);
             res += JsonUtility.ToJson(word) + '\n';
         }
         File.WriteAllText(dir + fileName, res);
+        res = "";
+        foreach(string key in stages.Keys){
+            Character chara = new Character(key, (int)stages[key]);
+            res += JsonUtility.ToJson(chara) + '\n';
+        }
+        File.WriteAllText(dir + stageFile, res);
     }
 
+    //load stage from local file
+    void loadStage()
+    {
+        string fullPath = Application.streamingAssetsPath + directory + stageFile;
 
-    void Load(Hashtable library)
+        if(File.Exists(fullPath))
+        {
+            foreach (string line in File.ReadLines(fullPath))
+            {
+                Character chara = JsonUtility.FromJson<Character>(line);
+                stages[chara.name] = chara.questionLeft;
+            }
+        }
+    }
+
+    //load library from local file
+    void LoadLibrary()
     {
         string fullPath = Application.streamingAssetsPath + directory + fileName;
         
@@ -67,50 +111,60 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    Hashtable GenerateBank(Hashtable library)
+    //randomly generate a stage that has question left to answer
+    void GenerateStage()
     {
+        Hashtable notCleared = new Hashtable();
+        foreach(string key in stages.Keys)
+        {
+            if((int)stages[key]!=0){
+                notCleared[key] = (int)stages[key];
+            }
+        }
+        int rand = Random.Range(0, notCleared.Count);
+        int i = 0;
+        foreach(string key in notCleared.Keys)
+        {
+            if(i == rand)
+            {
+                curStage = new Character(key, (int)notCleared[key]);
+            }
+        }
+        fileName = curStage.name + ".txt";
+    }
+
+    //randomly generate a question from current library
+    void GenerateQuestion(){
         Hashtable bank = new Hashtable();
         foreach(string key in library.Keys){
             if((int)library[key] == 0){
                 bank[key] = (int)library[key];
             }
         }
-        return bank;
-    }
-
-    Word GenerateQuestion(Hashtable bank){
         int rand = Random.Range(0, bank.Count);
         int i = 0;
-        Word word = new Word("");
         foreach(string key in bank.Keys){
             if(i == rand){
-                word = new Word(key, (int)bank[key]);
-                return word;
+                curQuestion = new Word(key, (int)bank[key]);
             }
             i = i + 1;
         }
-        return word;
     }
 
-    bool Answer(string key){
-        if(library.ContainsKey(key)){
-            library[key] = (int)library[key] + 1;
-            return true;
-        }
-        else{
-            return false;
-        }
-
+    //Record if correctly anwered the question
+    void Answer(){
+        library[curQuestion.text] = (int)library[curQuestion.text] + 1;
+        stages[curStage.name] = (int)library[curStage.name] - 1;
     }  
 
-    private char[] GenerateRandomAlpha(Word q)
+    //Generate a array of random letters that contains current question
+    private void GenerateRandomAlpha()
     {
-        char[] alphas = new char[alphaToGen];
-        string question = q.text;
+        alphas = new char[alphaToGen];
+        string question = curQuestion.text;
         for(int i = question.Length;i<alphaToGen;i++){
             question += (char)('a'+Random.Range(0,26));
         }
-        Debug.Log(question);
         for(int i = 0;i < alphas.Length;i++)
         {
             alphas[i] = ' ';
@@ -124,7 +178,6 @@ public class GameManager : MonoBehaviour
             }
             alphas[r] = question[i];
         }
-        return alphas;
     }
 
     // Start is called before the first frame update
@@ -134,16 +187,18 @@ public class GameManager : MonoBehaviour
         instance.GetComponent<Alphabet>().gm = this;
         candles = GameObject.FindGameObjectsWithTag("candle");
         library = new Hashtable();
-        Load(library);
-        bank = GenerateBank(library);
-        question = GenerateQuestion(bank);
-        Debug.Log(question.text);
-        char[] alphas = GenerateRandomAlpha(question);
-        //Answer("fire");
-        Save(library);
+        stages = new Hashtable();
+        loadStage();
+        GenerateStage();
+        LoadLibrary();
+        GenerateQuestion();
+        GenerateRandomAlpha();
+        //Answer();
+        Save();
         
     }
 
+    //handle drop event for letters
     public void dropAlphabet(Alphabet alpha)
     {
         foreach(GameObject candle in candles)
