@@ -45,16 +45,15 @@ public class GameManager : MonoBehaviour
         }
 
     }
-
-    public float candleOffset = 5f;
-
+    [SerializeField]
+    private float candleOffset = 5f;
     [SerializeField]
     private int alphaToGen = 8;
-
     private string directory = "/SaveData/";
     private string stageFile = "Stages.txt";
     private string fileName = "";
     private GameObject[] candles;
+    private GameObject[] letters;
     private Hashtable library;
     private Hashtable stages;
     private Word curQuestion;
@@ -180,11 +179,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Load alphabet prefab
+    private void LoadAlpha()
+    {   
+        letters = new GameObject[alphaToGen];
+        for(int i = 0;  i < alphas.Length; i++)
+        {
+            letters[i] = Instantiate(Resources.Load("Alphabets/" + alphas[i].ToString(), typeof(GameObject))) as GameObject;
+            letters[i].GetComponent<Alphabet>().gm = this;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {   
-        GameObject instance = Instantiate(Resources.Load("Alphabets/A", typeof(GameObject))) as GameObject;
-        instance.GetComponent<Alphabet>().gm = this;
+        //GameObject instance = Instantiate(Resources.Load("Alphabets/A", typeof(GameObject))) as GameObject;
+        //instance.GetComponent<Alphabet>().gm = this;
         candles = GameObject.FindGameObjectsWithTag("candle");
         library = new Hashtable();
         stages = new Hashtable();
@@ -194,6 +204,7 @@ public class GameManager : MonoBehaviour
         GenerateQuestion();
         GenerateRandomAlpha();
         //Answer();
+        LoadAlpha();
         Save();
         
     }
