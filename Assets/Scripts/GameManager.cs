@@ -24,11 +24,6 @@ public class GameManager : MonoBehaviour
         public int ifUsed(){
             return used;
         }
-
-        public void Answer()
-        {
-            used += 1;
-        }
     }
 
     [System.Serializable]
@@ -69,6 +64,7 @@ public class GameManager : MonoBehaviour
     private Word curQuestion;
     private Character curStage;
     private char[] alphas;
+    private GameObject tool;
     
 
     //Save stage and current library into local files
@@ -231,8 +227,44 @@ public class GameManager : MonoBehaviour
         {
             answer += candle.GetComponent<Candle>().letter; 
         }
-        Debug.Log(answer);
         return (answer == curQuestion.text);
+    } 
+
+    public void Combine()
+    {
+        if(CheckSpell())
+        {
+            tool = Instantiate(Resources.Load("Tools/" + curQuestion.text, typeof(GameObject))) as GameObject;
+        }
+        else
+        {
+            Reset();
+        }
+    }
+
+    void Reset()
+    {
+        SetAlphaPos();
+        foreach(GameObject candle in candles)
+        {   
+            Candle candleScript = candle.GetComponent<Candle>();
+            candleScript.letter = "";
+            candleScript.isLock = false;
+            GameObject child = candle.transform.GetChild(0).gameObject;
+            child.SetActive(false);
+        }
+        foreach(GameObject letter in letters)
+        {
+            letter.layer = 0;
+            Alphabet alpha = letter.GetComponent<Alphabet>();
+            alpha.Unlock();
+            alpha.SetFire(true);            
+        }
+    }
+
+    public void Cancel()
+    {
+        Reset();
     }
     
     // Start is called before the first frame update
@@ -261,15 +293,13 @@ public class GameManager : MonoBehaviour
             if(alpha.boxcollider.bounds.Intersects(candle.GetComponent<BoxCollider2D>().bounds) && !candleScript.isLock)
             {
                 candleScript.letter = alpha.GetLetter();
-                Debug.Log(candleScript.letter);
                 candleScript.isLock = true;
-                alpha.Lock();
-                alpha.gameObject.layer = 2;
                 GameObject child = candle.transform.GetChild(0).gameObject;
                 child.SetActive(true);
-                alpha.EliminateFire();
+                alpha.Lock();
+                alpha.gameObject.layer = 2;
+                alpha.SetFire(false);
                 alpha.transform.position = new Vector3(candle.transform.position.x, candle.transform.position.y + candleOffset, candle.transform.position.z);
-                CheckSpell();
                 break;
             }
         }

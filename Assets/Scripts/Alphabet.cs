@@ -17,10 +17,15 @@ public class Alphabet : MonoBehaviour
         isLocked = true;
     }
 
-    public void EliminateFire()
+    public void Unlock()
+    {
+        isLocked = false;
+    }
+
+    public void SetFire(bool isAct)
     {
         GameObject fire = transform.GetChild(0).gameObject;
-        fire.SetActive(false);
+        fire.SetActive(isAct);
     }
 
     public string GetLetter()
