@@ -43,10 +43,20 @@ public class GameManager : MonoBehaviour
             name = n;
             questionLeft = q;
         }
-
     }
+
+    [SerializeField]
+    private float initialAlphaX = 0f;
+    [SerializeField]
+    private float intiialAlphaY = 1.85f;
+    [SerializeField]
+    private float alphaOffsetX = 0.3f;
+    [SerializeField]
+    private float alphaOffsetY = 0.3f;
     [SerializeField]
     private float candleOffset = 5f;
+    [SerializeField]
+    private int alphaLine = 2;
     [SerializeField]
     private int alphaToGen = 8;
     private string directory = "/SaveData/";
@@ -59,6 +69,7 @@ public class GameManager : MonoBehaviour
     private Word curQuestion;
     private Character curStage;
     private char[] alphas;
+    
 
     //Save stage and current library into local files
     void Save()
@@ -188,13 +199,45 @@ public class GameManager : MonoBehaviour
             letters[i] = Instantiate(Resources.Load("Alphabets/" + alphas[i].ToString(), typeof(GameObject))) as GameObject;
             letters[i].GetComponent<Alphabet>().gm = this;
         }
+        SetAlphaPos();
     }
 
+    //Set up intial position for alphas
+    private void SetAlphaPos()
+    {   
+        int counter = 0;
+        float x = initialAlphaX;
+        float y = intiialAlphaY;
+        for(int i = 0; i < letters.Length; i++)
+        {
+            letters[i].transform.position = new Vector3(x, y, letters[i].transform.position.z);
+            x += alphaOffsetX;
+            counter += 1;
+            if(counter >= letters.Length/alphaLine)
+            {
+                counter = 0;
+                x = initialAlphaX;
+                y += alphaOffsetY;
+            }
+
+        }
+    }
+
+    //Check if current alphas position spell the correct answer
+    bool CheckSpell()
+    {   
+        string answer = "";
+        foreach(GameObject candle in candles)
+        {
+            answer += candle.GetComponent<Candle>().letter; 
+        }
+        Debug.Log(answer);
+        return (answer == curQuestion.text);
+    }
+    
     // Start is called before the first frame update
     void Start()
     {   
-        //GameObject instance = Instantiate(Resources.Load("Alphabets/A", typeof(GameObject))) as GameObject;
-        //instance.GetComponent<Alphabet>().gm = this;
         candles = GameObject.FindGameObjectsWithTag("candle");
         library = new Hashtable();
         stages = new Hashtable();
@@ -226,6 +269,7 @@ public class GameManager : MonoBehaviour
                 child.SetActive(true);
                 alpha.EliminateFire();
                 alpha.transform.position = new Vector3(candle.transform.position.x, candle.transform.position.y + candleOffset, candle.transform.position.z);
+                CheckSpell();
                 break;
             }
         }
