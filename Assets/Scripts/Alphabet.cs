@@ -12,6 +12,8 @@ public class Alphabet : MonoBehaviour
     private bool isLocked = false;
     [SerializeField]
     private string letter;
+    private GameObject fire;
+    Renderer rend;
     public void Lock()
     {
         isLocked = true;
@@ -34,6 +36,8 @@ public class Alphabet : MonoBehaviour
     }
     void Start()
     {
+        fire = transform.GetChild(0).gameObject;
+        rend  =fire.GetComponent<Renderer>();
     }
 
     void OnMouseDown()
@@ -49,6 +53,14 @@ public class Alphabet : MonoBehaviour
         {
             Vector3 curPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
             curPos.z = 0f;
+            if(transform.position.x < curPos.x)
+            {
+                rend.material.SetColor("distortion_speed", new Color(1f, -0.51f, 0f, 0f));
+            }
+            else if(transform.position.x > curPos.x)
+            {
+                rend.material.SetColor("distortion_speed", new Color(-1f, -0.51f, 0f, 0f));
+            }
             transform.position = curPos;
         }
         
@@ -56,6 +68,7 @@ public class Alphabet : MonoBehaviour
 
     void OnMouseUp()
     {   
+        rend.material.SetColor("distortion_speed", new Color(-0.07f, -0.51f, 0f, 0f));
         if(!isLocked)
         {
             gm.dropAlphabet(this);
