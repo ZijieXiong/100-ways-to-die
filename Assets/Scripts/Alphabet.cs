@@ -52,7 +52,7 @@ public class Alphabet : MonoBehaviour
 
     void OnMouseDown()
     {
-        //screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+        screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
 
     }
 
