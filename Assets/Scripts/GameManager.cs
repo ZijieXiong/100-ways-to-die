@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
     }
 
     [SerializeField]
+    private GameObject canvas;
+    [SerializeField]
     private float initialAlphaX = 0f;
     [SerializeField]
     private float intiialAlphaY = 1.85f;
@@ -59,12 +61,16 @@ public class GameManager : MonoBehaviour
     private string fileName = "";
     private GameObject[] candles;
     private GameObject[] letters;
+    private GameObject op;
+    private GameObject ed;
     private Hashtable library;
     private Hashtable stages;
     private Word curQuestion;
     private Character curStage;
     private char[] alphas;
     private GameObject tool;
+    private ConversationManager opcm;
+    private ConversationManager edcm;
     
 
     //Save stage and current library into local files
@@ -219,6 +225,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void LoadOp()
+    {
+        op = Instantiate(Resources.Load("UI/" + "Opening" + curStage.name, typeof(GameObject))) as GameObject;
+        op.transform.SetParent(canvas.transform, false);
+        opcm = op.GetComponent<ConversationManager>();
+    }
+
+    private void LoadED()
+    {
+        ed = Instantiate(Resources.Load("UI/" + "Ending" + curStage.name, typeof(GameObject))) as GameObject;
+        ed.transform.SetParent(canvas.transform, false);
+        edcm = ed.GetComponent<ConversationManager>();
+    }
+
     //Check if current alphas position spell the correct answer
     bool CheckSpell()
     {   
@@ -235,6 +255,7 @@ public class GameManager : MonoBehaviour
         if(CheckSpell())
         {
             tool = Instantiate(Resources.Load("Tools/" + curQuestion.text, typeof(GameObject))) as GameObject;
+            edcm.StartConversation(0);
         }
         else
         {
@@ -267,6 +288,11 @@ public class GameManager : MonoBehaviour
         Reset();
     }
     
+    public void StartOP()
+    {
+        opcm.StartConversation(0);
+    }
+
     // Start is called before the first frame update
     void Start()
     {   
@@ -278,9 +304,10 @@ public class GameManager : MonoBehaviour
         LoadLibrary();
         GenerateQuestion();
         GenerateRandomAlpha();
-        //Answer();
         LoadAlpha();
-        Save();
+        LoadOp();
+        LoadED();
+        opcm.StartConversation(0);
         
     }
 
