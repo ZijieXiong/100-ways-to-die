@@ -245,7 +245,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1410928038081092704}
+  - component: {fileID: 7308815505349407560}
   - component: {fileID: 1410928038081092711}
   m_Layer: 0
   m_Name: EndingPangfu
@@ -254,8 +254,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1410928038081092704
-Transform:
+--- !u!224 &7308815505349407560
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -269,6 +269,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -820, y: -418}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1410928038081092711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,13 +467,13 @@ RectTransform:
   - {fileID: 1410928037978888539}
   - {fileID: 1410928038049193342}
   - {fileID: 1410928038812691442}
-  m_Father: {fileID: 1410928038081092704}
+  m_Father: {fileID: 7308815505349407560}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -167.5}
-  m_SizeDelta: {x: 921, y: 185}
+  m_SizeDelta: {x: 821, y: 85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1410928038965437066
 CanvasRenderer:
