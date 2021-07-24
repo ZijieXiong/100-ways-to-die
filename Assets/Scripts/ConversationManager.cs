@@ -21,7 +21,6 @@ public class ConversationManager : MonoBehaviour
     void Start()
     {
         sentences = new Queue<string>();
-        StartConversation(0);
     }
 
     public void StartConversation(int startInd)
@@ -49,7 +48,7 @@ public class ConversationManager : MonoBehaviour
 
         nameText.text = dialogue.name;
 
-        sentences.Clear();
+        sentences = new Queue<string>();
 
         foreach (string sentence in dialogue.sentences)
         {
