@@ -13,7 +13,6 @@ public class ConversationManager : MonoBehaviour
     private Queue<string> sentences;
 
     public Conversation conversation;
-
     
     private int curInd;
     private int endInd;
@@ -39,10 +38,9 @@ public class ConversationManager : MonoBehaviour
     {   
         if(lastInd <= conversation.dialogues.Length && startInd < lastInd && startInd >= 0){
             curInd = startInd;
-            endInd = endInd;
+            endInd = lastInd;
             StartDialogue(conversation.dialogues[curInd]);
-        }
-        
+        }        
     }
 
     public void StartDialogue(Dialogue dialogue)
@@ -94,8 +92,7 @@ public class ConversationManager : MonoBehaviour
         else
         {
             animator.SetBool("IsOpen", false);
+            this.SetActive(false);
         }
-
     }
-
 }

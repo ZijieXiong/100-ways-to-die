@@ -9,7 +9,7 @@ public class Alphabet : MonoBehaviour
     public GameManager gm;
     public BoxCollider2D boxcollider;
     private Vector3 screenPoint;
-    private Vector3 offset;
+    //private Vector3 offset;
     private float dragOffset = 0.3f;
     private bool isLocked = false;
     [SerializeField]
@@ -17,6 +17,7 @@ public class Alphabet : MonoBehaviour
     private GameObject fire;
     Renderer rend;
     private float timer = 0f;
+
     public void Lock()
     {
         isLocked = true;
@@ -37,15 +38,21 @@ public class Alphabet : MonoBehaviour
     {
         return letter;
     }
+
     void Start()
     {
         fire = transform.GetChild(0).gameObject;
         rend  =fire.GetComponent<Renderer>();
     }
 
+    private void SetFireBrightness(float brightness)
+    {
+
+    }
+
     void OnMouseDown()
     {
-        screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+        //screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
 
     }
 
