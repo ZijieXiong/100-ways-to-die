@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 1237740}
   - component: {fileID: 1237739}
   m_Layer: 0
-  m_Name: DialogueManager
+  m_Name: ConversationManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -155,6 +155,15 @@ MonoBehaviour:
   nameText: {fileID: 2050648025}
   dialogueText: {fileID: 2129339380}
   animator: {fileID: 927521796}
+  conversation:
+    dialogues:
+    - name: Wuge
+      sentences:
+      - Hello
+      - Nice to see you
+    - name: Pangfu
+      sentences:
+      - Fuck you
 --- !u!4 &1237740
 Transform:
   m_ObjectHideFlags: 0
@@ -163,11 +172,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1237738}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -649.5, y: -299.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_Father: {fileID: 1381163508}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &40143190
 GameObject:
@@ -829,7 +838,7 @@ Transform:
   - {fileID: 2033166276}
   - {fileID: 1278690009}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &366216550
 GameObject:
@@ -926,7 +935,7 @@ RectTransform:
   - {fileID: 921463513}
   - {fileID: 587896404}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1079,7 +1088,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1381163508}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1255,7 +1264,7 @@ Transform:
   - {fileID: 1344438271}
   - {fileID: 723359241}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &587896403
 GameObject:
@@ -1359,7 +1368,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &626739603
 GameObject:
@@ -1646,7 +1655,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1237739}
-        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: ConversationManager, Assembly-CSharp
         m_MethodName: DisplayNextSentence
         m_Mode: 1
         m_Arguments:
@@ -2141,7 +2150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2180,7 +2189,7 @@ RectTransform:
   - {fileID: 2129339378}
   - {fileID: 745870718}
   m_Father: {fileID: 1381163508}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2577,7 +2586,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -45, y: 0, z: 0}
 --- !u!1001 &1168624242
 PrefabInstance:
@@ -3381,7 +3390,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1381163508}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3561,7 +3570,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1360799927 stripped
 Transform:
@@ -3697,7 +3706,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1381163508
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3709,6 +3718,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1237740}
   - {fileID: 2087848765}
   - {fileID: 927521799}
   - {fileID: 2008050573}
@@ -3758,7 +3768,7 @@ Transform:
   - {fileID: 537115385}
   - {fileID: 380111378}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1540353369
 GameObject:
@@ -3842,7 +3852,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1540353373
 MonoBehaviour:
@@ -4674,7 +4684,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1954834070
 GameObject:
@@ -4785,7 +4795,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1381163508}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5223,7 +5233,7 @@ RectTransform:
   m_Children:
   - {fileID: 1292598494}
   m_Father: {fileID: 1381163508}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5242,12 +5252,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e2bb11282ff0f4a88543756df1930b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-    name: Wu'Ge
-    sentences:
-    - Hello! I am Wu'Ge.
-    - I like playing football.
-    - Do you like playing football?
 --- !u!114 &2087848767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5526,7 +5530,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4795838562439275801, guid: 93becd270c6ff104a84a8c4e7d4209d7, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4795838562439275801, guid: 93becd270c6ff104a84a8c4e7d4209d7, type: 3}
       propertyPath: m_LocalPosition.x

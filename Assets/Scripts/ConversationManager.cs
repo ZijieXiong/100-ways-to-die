@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueManager : MonoBehaviour
+public class ConversationManager : MonoBehaviour
 {
     public Text nameText;
     public Text dialogueText;
@@ -12,10 +12,37 @@ public class DialogueManager : MonoBehaviour
 
     private Queue<string> sentences;
 
+    public Conversation conversation;
+
+    
+    private int curInd;
+    private int endInd;
+
     // Start is called before the first frame update
     void Start()
     {
         sentences = new Queue<string>();
+        StartConversation(0);
+    }
+
+    public void StartConversation(int startInd)
+    {
+        if(startInd >= 0 && startInd < conversation.dialogues.Length)
+        {
+            curInd = startInd;
+            endInd = conversation.dialogues.Length;
+            StartDialogue(conversation.dialogues[curInd]);
+        }
+    }
+
+    public void StartConversation(int startInd, int lastInd)
+    {   
+        if(lastInd <= conversation.dialogues.Length && startInd < lastInd && startInd >= 0){
+            curInd = startInd;
+            endInd = endInd;
+            StartDialogue(conversation.dialogues[curInd]);
+        }
+        
     }
 
     public void StartDialogue(Dialogue dialogue)
@@ -59,7 +86,16 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
-        animator.SetBool("IsOpen", false);
+        curInd++;
+        if(curInd < endInd)
+        {
+            StartDialogue(conversation.dialogues[curInd]);
+        }
+        else
+        {
+            animator.SetBool("IsOpen", false);
+        }
+
     }
 
 }
