@@ -92,7 +92,7 @@ public class ConversationManager : MonoBehaviour
         else
         {
             animator.SetBool("IsOpen", false);
-            this.SetActive(false);
+            //this.SetActive(false);
         }
     }
 }
