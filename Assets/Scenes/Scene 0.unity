@@ -368,6 +368,16 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7617652299512585016, guid: f9cfcbd335bf8e445a698904905f0ed0, type: 3}
   m_PrefabInstance: {fileID: 1764606553}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &917481039 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3612824969066219037, guid: f9cfcbd335bf8e445a698904905f0ed0, type: 3}
+  m_PrefabInstance: {fileID: 1764606553}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1008419409 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7617652299796011880, guid: f9cfcbd335bf8e445a698904905f0ed0, type: 3}
+  m_PrefabInstance: {fileID: 1764606553}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1245331667
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,6 +603,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1399525732}
     m_Modifications:
+    - target: {fileID: 3612824967356482350, guid: f9cfcbd335bf8e445a698904905f0ed0, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 75987c5dd02337043b7b5561e2b68b1b, type: 3}
+    - target: {fileID: 3612824967356482350, guid: f9cfcbd335bf8e445a698904905f0ed0, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3612824969066219036, guid: f9cfcbd335bf8e445a698904905f0ed0, type: 3}
+      propertyPath: conversation.dialogues.Array.data[0].name
+      value: "\u5F88\u4E45\u5F88\u4E45\u4EE5\u524D\u2026\u2026"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3612824969066219037, guid: f9cfcbd335bf8e445a698904905f0ed0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7617652299512585016, guid: f9cfcbd335bf8e445a698904905f0ed0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -681,6 +707,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prologue
       objectReference: {fileID: 0}
+    - target: {fileID: 7617652301347610552, guid: f9cfcbd335bf8e445a698904905f0ed0, type: 3}
+      propertyPath: img1
+      value: 
+      objectReference: {fileID: 1008419409}
+    - target: {fileID: 7617652301347610552, guid: f9cfcbd335bf8e445a698904905f0ed0, type: 3}
+      propertyPath: img2
+      value: 
+      objectReference: {fileID: 917481039}
     - target: {fileID: 7617652301347610557, guid: f9cfcbd335bf8e445a698904905f0ed0, type: 3}
       propertyPath: m_RaycastTarget
       value: 0

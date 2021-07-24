@@ -145,7 +145,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b, type: 2}
+    m_Font: {fileID: 12800000, guid: 75987c5dd02337043b7b5561e2b68b1b, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
@@ -157,7 +157,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: NPC Name Here
+  m_Text: "\u4E00\u4E8C\u4E09\u56DB\u4E94"
 --- !u!1 &3612824967458428099
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,7 +522,7 @@ MonoBehaviour:
   animator: {fileID: 3612824968238250227}
   conversation:
     dialogues:
-    - name: "Long, long ago\u2026"
+    - name: "\u5F88\u4E45\u5F88\u4E45\u4EE5\u524D\u2026\u2026"
       sentences:
       - 
 --- !u!1 &7617652299512585023
