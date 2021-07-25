@@ -524,7 +524,8 @@ MonoBehaviour:
     dialogues:
     - name: "\u5F88\u4E45\u5F88\u4E45\u4EE5\u524D\u2026\u2026"
       sentences:
-      - 
+      - words: 
+        animationChange: []
 --- !u!1 &7617652299512585023
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,7 +577,7 @@ GameObject:
   - component: {fileID: 7617652299796011881}
   - component: {fileID: 7617652299796011876}
   m_Layer: 5
-  m_Name: Wu'GeStory1
+  m_Name: WugeStory1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
