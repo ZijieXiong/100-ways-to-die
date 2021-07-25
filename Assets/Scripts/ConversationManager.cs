@@ -10,7 +10,7 @@ public class ConversationManager : MonoBehaviour
 
     public Animator animator;
 
-    private Queue<string> sentences;
+    private Queue<Sentence> sentences;
 
     public Conversation conversation;
     
@@ -20,7 +20,7 @@ public class ConversationManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sentences = new Queue<string>();
+        sentences = new Queue<Sentence>();
     }
 
     public void StartConversation(int startInd)
@@ -48,11 +48,11 @@ public class ConversationManager : MonoBehaviour
 
         nameText.text = dialogue.name;
 
-        sentences = new Queue<string>();
+        sentences = new Queue<Sentence>();
 
         foreach (Sentence sentence in dialogue.sentences)
         {
-            sentences.Enqueue(sentence.words);
+            sentences.Enqueue(sentence);
         }
 
         DisplayNextSentence();
@@ -66,9 +66,10 @@ public class ConversationManager : MonoBehaviour
             return;
         }
 
-        string sentence = sentences.Dequeue();
+        Sentence sentence = sentences.Dequeue();
+        ChangeAnimation(sentence.animationChanges);
         StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
+        StartCoroutine(TypeSentence(sentence.words));
     }
 
     IEnumerator TypeSentence(string sentence)
@@ -91,7 +92,18 @@ public class ConversationManager : MonoBehaviour
         else
         {
             animator.SetBool("IsOpen", false);
-            //this.SetActive(false);
+        }
+    }
+
+    void ChangeAnimation(AnimationChange[] animationChanges)
+    {   
+        foreach(AnimationChange ac in animationChanges)
+        {   
+            Debug.Log(ac.varName);
+            GameObject character = transform.Find("Characters").Find(ac.charName).gameObject;
+            Animator animator = character.GetComponent<Animator>();
+            animator.SetBool(ac.varName, ac.varValue);
+
         }
     }
 }
