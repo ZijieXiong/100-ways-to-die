@@ -99,10 +99,14 @@ public class ConversationManager : MonoBehaviour
     {   
         foreach(AnimationChange ac in animationChanges)
         {   
-            Debug.Log(ac.varName);
-            GameObject character = transform.Find("Characters").Find(ac.charName).gameObject;
-            Animator animator = character.GetComponent<Animator>();
-            animator.SetBool(ac.varName, ac.varValue);
+            if(ac != null)
+            {
+                Debug.Log(ac.varName);
+                GameObject character = transform.Find(ac.charName).gameObject;
+                Animator animator = character.GetComponent<Animator>();
+                animator.SetBool(ac.varName, ac.varValue);
+            }
+           
 
         }
     }
