@@ -50,9 +50,9 @@ public class ConversationManager : MonoBehaviour
 
         sentences = new Queue<string>();
 
-        foreach (string sentence in dialogue.sentences)
+        foreach (Sentence sentence in dialogue.sentences)
         {
-            sentences.Enqueue(sentence);
+            sentences.Enqueue(sentence.words);
         }
 
         DisplayNextSentence();
