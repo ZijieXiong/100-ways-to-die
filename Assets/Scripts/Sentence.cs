@@ -10,6 +10,6 @@ public class Sentence
     [TextArea(3,10)]
     public string words;
 
-    public AnimationChange[] animationChange;
+    public AnimationChange[] animationChanges;
 
 }
