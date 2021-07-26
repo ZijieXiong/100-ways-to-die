@@ -47,13 +47,14 @@ public class Alphabet : MonoBehaviour
 
     private void SetFireBrightness(float brightness)
     {
-
+        GameObject light2D = fire.transform.GetChild(0).gameObject;
+        Debug.Log(light2D.name);
     }
 
     void OnMouseDown()
     {
         screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
-
+        SetFireBrightness(10f);
     }
 
 
