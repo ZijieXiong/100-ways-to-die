@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using static System.Math;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class Alphabet : MonoBehaviour
 {
     public GameManager gm;
     public BoxCollider2D boxcollider;
+    public float BrightnessOffClick = 0.55f;
+    public float BrightnessOnClick = 10f;
+    
     private Vector3 screenPoint;
     //private Vector3 offset;
     private float dragOffset = 0.3f;
@@ -48,13 +52,15 @@ public class Alphabet : MonoBehaviour
     private void SetFireBrightness(float brightness)
     {
         GameObject light2D = fire.transform.GetChild(0).gameObject;
-        Debug.Log(light2D.name);
+        //Debug.Log(light2D.name);
+        Light2D light = light2D.GetComponent<Light2D>();
+        light.intensity = brightness;
     }
 
     void OnMouseDown()
     {
         screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
-        SetFireBrightness(10f);
+        SetFireBrightness(BrightnessOnClick);
     }
 
 
@@ -97,6 +103,7 @@ public class Alphabet : MonoBehaviour
         if(!isLocked)
         {
             gm.dropAlphabet(this);
+            SetFireBrightness(BrightnessOffClick);
         }
     }
 

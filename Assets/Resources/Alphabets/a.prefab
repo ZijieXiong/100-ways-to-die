@@ -126,6 +126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
   boxcollider: {fileID: 913483069792418156}
+  BrightnessOffClick: 0.55
+  BrightnessOnClick: 10
   letter: a
 --- !u!1 &4327697363314262609
 GameObject:
