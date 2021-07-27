@@ -288,7 +288,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 1410928037978888533}
   dialogueText: {fileID: 1410928038049193336}
-  animators: []
+  isEnd: 0
+  animators:
+  - {fileID: 1410928038965437064}
   conversation:
     dialogues:
     - name: Pangfu
