@@ -1934,7 +1934,7 @@ GameObject:
   - component: {fileID: 1172263902}
   - component: {fileID: 1172263903}
   m_Layer: 0
-  m_Name: Six-pointed Star
+  m_Name: Six-pointedStar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2150,7 +2150,7 @@ GameObject:
   - component: {fileID: 1210117126}
   - component: {fileID: 1210117125}
   m_Layer: 0
-  m_Name: Six-pointed Star Light
+  m_Name: Six-pointedStarLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2470,7 +2470,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1278690009}
   m_Layer: 0
-  m_Name: LightBulb Spotlights
+  m_Name: LightBulbSpotlights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2503,7 +2503,7 @@ GameObject:
   - component: {fileID: 1282919184}
   - component: {fileID: 1282919185}
   m_Layer: 0
-  m_Name: Light Bulb Spotlight_R
+  m_Name: LightBulbSpotlightRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3317,7 +3317,7 @@ GameObject:
   - component: {fileID: 1758649685}
   - component: {fileID: 1758649686}
   m_Layer: 0
-  m_Name: Light Bulb Spotlight_L
+  m_Name: LightBulbSpotlightLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
