@@ -7,13 +7,12 @@ public class ConversationManager : MonoBehaviour
 {
     public Text nameText;
     public Text dialogueText;
-
+    public bool isEnd = false;
     public Animator[] animators;
-
-
+    public Conversation conversation;   
     private Queue<Sentence> sentences;
 
-    public Conversation conversation;
+    
     
     private int curInd;
     private int endInd;
@@ -58,7 +57,7 @@ public class ConversationManager : MonoBehaviour
         {
             sentences.Enqueue(sentence);
         }
-
+        isEnd = false;
         DisplayNextSentence();
     }
 
@@ -99,6 +98,7 @@ public class ConversationManager : MonoBehaviour
             {
                 animator.SetBool("IsOpen", false);
             } 
+            isEnd = true;
         }
     }
 

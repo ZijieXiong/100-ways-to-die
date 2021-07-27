@@ -2050,7 +2050,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1111765914}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: StartOP
+        m_MethodName: Story
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

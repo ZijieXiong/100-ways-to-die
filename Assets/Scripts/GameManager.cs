@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -79,6 +80,29 @@ public class GameManager : MonoBehaviour
     private ConversationManager opcm;
     private ConversationManager edcm;
     
+    public void Combine()
+    {
+        if(CheckSpell())
+        {
+            //tool = Instantiate(Resources.Load("Tools/" + curQuestion.text, typeof(GameObject))) as GameObject;
+            edcm.StartConversation(0);
+        }
+        else
+        {
+            Reset();
+        }
+    }
+
+    public void Cancel()
+    {
+        Reset();
+    }
+    
+    public void Story()
+    {
+        opcm.StartConversation(0);
+    }
+
 
     //Save stage and current library into local files
     void Save()
@@ -271,18 +295,7 @@ public class GameManager : MonoBehaviour
         return (answer == curQuestion.text);
     } 
 
-    public void Combine()
-    {
-        if(CheckSpell())
-        {
-            tool = Instantiate(Resources.Load("Tools/" + curQuestion.text, typeof(GameObject))) as GameObject;
-            edcm.StartConversation(0);
-        }
-        else
-        {
-            Reset();
-        }
-    }
+
 
     void Reset()
     {
@@ -304,34 +317,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void Cancel()
-    {
-        Reset();
-    }
+
+
     
-    public void StartOP()
-    {
-        opcm.StartConversation(0);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {   
-        candles = GameObject.FindGameObjectsWithTag("candle");
-        library = new Hashtable();
-        stages = new Hashtable();
-        loadStage();
-        GenerateStage();
-        LoadLibrary();
-        GenerateQuestion();
-        GenerateRandomAlpha();
-        LoadAlpha();
-        LoadOp();
-        LoadED();
-        opcm.StartConversation(0);
-        
-    }
-
     //handle drop event for letters
     public void dropAlphabet(Alphabet alpha)
     {
@@ -353,9 +341,31 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    // Start is called before the first frame update
+    void Start()
+    {   
+        candles = GameObject.FindGameObjectsWithTag("candle");
+        library = new Hashtable();
+        stages = new Hashtable();
+        loadStage();
+        GenerateStage();
+        LoadLibrary();
+        GenerateQuestion();
+        GenerateRandomAlpha();
+        LoadAlpha();
+        LoadOp();
+        LoadED();
+        opcm.StartConversation(0);
+        
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+        if(edcm.isEnd)
+        {
+            SceneManager.LoadScene("PlayScene");
+        }
     }
 }
