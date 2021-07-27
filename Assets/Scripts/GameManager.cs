@@ -70,7 +70,8 @@ public class GameManager : MonoBehaviour
     }
     
     public void Story()
-    {
+    {   
+        TurnLight(false);
         opcm.StartConversation(0);
     }  
 
@@ -100,6 +101,10 @@ public class GameManager : MonoBehaviour
         foreach(GameObject light in lights)
         {
             light.SetActive(isOn);
+        }
+        foreach(GameObject letter in letters)
+        {
+            letter.SetActive(isOn);
         }
     }
 
@@ -294,6 +299,7 @@ public class GameManager : MonoBehaviour
         if(opcm.isEnd)
         {
             TurnLight(true);
+
         }
         if(edcm.isEnd)
         {   
