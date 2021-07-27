@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {   
     public bool debug = false;
+    public GameObject[] lights;
 
     [SerializeField]
     private GameObject canvas;
@@ -42,6 +43,8 @@ public class GameManager : MonoBehaviour
     private GameObject tool;
     private ConversationManager opcm;
     private ConversationManager edcm;
+
+
     
     public void Combine()
     {
@@ -51,6 +54,7 @@ public class GameManager : MonoBehaviour
             {
                 Answer();
             }
+            TurnLight(false);
             //tool = Instantiate(Resources.Load("Tools/" + curQuestion.text, typeof(GameObject))) as GameObject;
             edcm.StartConversation(0);
         }
@@ -88,6 +92,14 @@ public class GameManager : MonoBehaviour
                 alpha.transform.position = new Vector3(candle.transform.position.x, candle.transform.position.y + candleOffset, candle.transform.position.z);
                 break;
             }
+        }
+    }
+
+    public void TurnLight(bool isOn)
+    {
+        foreach(GameObject light in lights)
+        {
+            light.SetActive(isOn);
         }
     }
 
@@ -272,12 +284,17 @@ public class GameManager : MonoBehaviour
         LoadOp();
         LoadED();
         opcm.StartConversation(0);
+        TurnLight(false);
         
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        if(opcm.isEnd)
+        {
+            TurnLight(true);
+        }
         if(edcm.isEnd)
         {   
             Save();

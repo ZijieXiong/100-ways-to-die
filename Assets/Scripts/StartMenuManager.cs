@@ -7,19 +7,27 @@ using static DatabaseManager;
 public class StartMenuManager : MonoBehaviour
 {
     public GameObject prologue;
-
-
-    public void GameStart()
-    {   
+    public void NewGame()
+    {
         DatabaseManager.ResetDatabase();
-        SceneManager.LoadScene("PlayScene");
+        GameStart();
     }
+
+    public void Continue()
+    {
+        GameStart();
+    }
+
+    private void GameStart()
+    {}
 
     // Start is called before the first frame update
     void Start()
     {
         
     }
+
+
 
     // Update is called once per frame
     void Update()

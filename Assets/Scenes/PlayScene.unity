@@ -1834,6 +1834,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
+  lights:
+  - {fileID: 1758649684}
+  - {fileID: 1282919183}
   canvas: {fileID: 366216550}
   initialAlphaX: -9.85
   intiialAlphaY: 1.9
