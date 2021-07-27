@@ -21,6 +21,7 @@ public class ConversationManager : MonoBehaviour
     void Start()
     {
         sentences = new Queue<Sentence>();
+        isEnd = false;
     }
 
     public void StartConversation(int startInd)

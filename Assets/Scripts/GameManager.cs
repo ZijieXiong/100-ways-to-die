@@ -2,45 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using static DatabaseManager;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [System.Serializable]
-    public class Word
-    {
-        public string text;
-        [SerializeField]
-        int used = 0;
-
-        public Word(string t){
-            text = t;
-        }
-
-        public Word(string t, int u){
-            text = t;
-            used = u;
-        }
-
-        public int ifUsed(){
-            return used;
-        }
-    }
-
-    [System.Serializable]
-    public class Character
-    {
-        public string name;
-
-        public int questionLeft;
-
-        public Character(string n, int q)
-        {
-            name = n;
-            questionLeft = q;
-        }
-    }
-
     [SerializeField]
     private GameObject canvas;
     [SerializeField]
@@ -61,11 +27,6 @@ public class GameManager : MonoBehaviour
     private float alphaBrightnessOnClick = 5f;
     [SerializeField]
     private float alphaBrightnessOffClick = 0.55f;
-
-
-
-    private string directory = "/SaveData/";
-    private string stageFile = "Stages.txt";
     private string fileName = "";
     private GameObject[] candles;
     private GameObject[] letters;
@@ -83,7 +44,8 @@ public class GameManager : MonoBehaviour
     public void Combine()
     {
         if(CheckSpell())
-        {
+        {   
+            Answer();
             //tool = Instantiate(Resources.Load("Tools/" + curQuestion.text, typeof(GameObject))) as GameObject;
             edcm.StartConversation(0);
         }
@@ -101,55 +63,25 @@ public class GameManager : MonoBehaviour
     public void Story()
     {
         opcm.StartConversation(0);
-    }
+    }  
 
-
-    //Save stage and current library into local files
-    void Save()
+    //handle drop event for letters
+    public void dropAlphabet(Alphabet alpha)
     {
-        string dir = Application.streamingAssetsPath + directory;
-        string res = "";
-        if(!Directory.Exists(dir)){
-            Directory.CreateDirectory(dir);
-        }
-        foreach(string key in library.Keys){
-            Word word = new Word(key, (int)library[key]);
-            res += JsonUtility.ToJson(word) + '\n';
-        }
-        File.WriteAllText(dir + fileName, res);
-        res = "";
-        foreach(string key in stages.Keys){
-            Character chara = new Character(key, (int)stages[key]);
-            res += JsonUtility.ToJson(chara) + '\n';
-        }
-        File.WriteAllText(dir + stageFile, res);
-    }
-
-    //load stage from local file
-    void loadStage()
-    {
-        string fullPath = Application.streamingAssetsPath + directory + stageFile;
-
-        if(File.Exists(fullPath))
-        {
-            foreach (string line in File.ReadLines(fullPath))
+        foreach(GameObject candle in candles)
+        {   
+            Candle candleScript = candle.GetComponent<Candle>();
+            if(alpha.boxcollider.bounds.Intersects(candle.GetComponent<BoxCollider2D>().bounds) && !candleScript.isLock)
             {
-                Character chara = JsonUtility.FromJson<Character>(line);
-                stages[chara.name] = chara.questionLeft;
-            }
-        }
-    }
-
-    //load library from local file
-    void LoadLibrary()
-    {
-        string fullPath = Application.streamingAssetsPath + directory + fileName;
-        
-        if(File.Exists(fullPath))
-        {
-            foreach (string line in File.ReadLines(fullPath)){
-                Word word = JsonUtility.FromJson<Word>(line);
-                library[word.text] = word.ifUsed();
+                candleScript.letter = alpha.GetLetter();
+                candleScript.isLock = true;
+                GameObject child = candle.transform.GetChild(0).gameObject;
+                child.SetActive(true);
+                alpha.Lock();
+                alpha.gameObject.layer = 2;
+                alpha.SetFire(false);
+                alpha.transform.position = new Vector3(candle.transform.position.x, candle.transform.position.y + candleOffset, candle.transform.position.z);
+                break;
             }
         }
     }
@@ -169,7 +101,7 @@ public class GameManager : MonoBehaviour
         foreach(string key in notCleared.Keys)
         {
             if(i == rand)
-            {
+            {   
                 curStage = new Character(key, (int)notCleared[key]);
             }
         }
@@ -196,8 +128,9 @@ public class GameManager : MonoBehaviour
 
     //Record if correctly anwered the question
     void Answer(){
+
         library[curQuestion.text] = (int)library[curQuestion.text] + 1;
-        stages[curStage.name] = (int)library[curStage.name] - 1;
+        stages[curStage.name] = (int)stages[curStage.name] - 1;
     }  
 
     //Generate a array of random letters that contains current question
@@ -241,8 +174,6 @@ public class GameManager : MonoBehaviour
             letters[i] = Instantiate(Resources.Load("Alphabets/" + alphas[i].ToString(), typeof(GameObject))) as GameObject;
             Alphabet letterScript = letters[i].GetComponent<Alphabet>();
             letterScript.gm = this;
-            //letterScript.BrightnessOnClick = alphaBrightnessOnClick;
-            //letterScript.BrightnessOffClick = alphaBrightnessOffClick;
             
         }
         SetAlphaBrightness(letters);
@@ -284,8 +215,14 @@ public class GameManager : MonoBehaviour
         edcm = ed.GetComponent<ConversationManager>();
     }
 
+    private void Save()
+    {
+        DatabaseManager.SaveLibrary(library, fileName);
+        DatabaseManager.SaveStage(stages);
+    }
+
     //Check if current alphas position spell the correct answer
-    bool CheckSpell()
+    private bool CheckSpell()
     {   
         string answer = "";
         foreach(GameObject candle in candles)
@@ -295,9 +232,7 @@ public class GameManager : MonoBehaviour
         return (answer == curQuestion.text);
     } 
 
-
-
-    void Reset()
+    private void Reset()
     {
         SetAlphaPos();
         foreach(GameObject candle in candles)
@@ -317,40 +252,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-
-    
-    //handle drop event for letters
-    public void dropAlphabet(Alphabet alpha)
-    {
-        foreach(GameObject candle in candles)
-        {   
-            Candle candleScript = candle.GetComponent<Candle>();
-            if(alpha.boxcollider.bounds.Intersects(candle.GetComponent<BoxCollider2D>().bounds) && !candleScript.isLock)
-            {
-                candleScript.letter = alpha.GetLetter();
-                candleScript.isLock = true;
-                GameObject child = candle.transform.GetChild(0).gameObject;
-                child.SetActive(true);
-                alpha.Lock();
-                alpha.gameObject.layer = 2;
-                alpha.SetFire(false);
-                alpha.transform.position = new Vector3(candle.transform.position.x, candle.transform.position.y + candleOffset, candle.transform.position.z);
-                break;
-            }
-        }
-    }
-
-
     // Start is called before the first frame update
     void Start()
     {   
         candles = GameObject.FindGameObjectsWithTag("candle");
         library = new Hashtable();
         stages = new Hashtable();
-        loadStage();
+        DatabaseManager.loadStage(stages);
         GenerateStage();
-        LoadLibrary();
+        DatabaseManager.LoadLibrary(library, fileName);
         GenerateQuestion();
         GenerateRandomAlpha();
         LoadAlpha();
@@ -364,7 +274,8 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if(edcm.isEnd)
-        {
+        {   
+            Save();
             SceneManager.LoadScene("PlayScene");
         }
     }
