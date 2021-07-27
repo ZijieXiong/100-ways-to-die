@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ConversationManager : MonoBehaviour
-{
+{   
+    public GameManager gm;
     public Text nameText;
     public Text dialogueText;
     public bool isEnd = false;
@@ -99,6 +100,7 @@ public class ConversationManager : MonoBehaviour
             {
                 animator.SetBool("IsOpen", false);
             } 
+            gm.TurnLight(true);
             isEnd = true;
         }
     }
@@ -109,7 +111,6 @@ public class ConversationManager : MonoBehaviour
         {   
             if(ac != null)
             {
-                Debug.Log(ac.varName);
                 GameObject character = transform.Find(ac.charName).gameObject;
                 Animator animator = character.GetComponent<Animator>();
                 animator.SetBool(ac.varName, ac.varValue);

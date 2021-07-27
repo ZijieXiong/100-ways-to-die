@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using static DatabaseManager;
 using UnityEngine.SceneManagement;
+using System.Threading;
 
 public class GameManager : MonoBehaviour
 {   
@@ -31,6 +32,8 @@ public class GameManager : MonoBehaviour
     private float alphaBrightnessOnClick = 5f;
     [SerializeField]
     private float alphaBrightnessOffClick = 0.55f;
+    [SerializeField]
+    private float starLightFadeSpeed = 0.01f;
     private string fileName = "";
     private GameObject[] candles;
     private GameObject[] letters;
@@ -56,6 +59,7 @@ public class GameManager : MonoBehaviour
                 Answer();
             }
             TurnLight(false);
+            Debug.Log("turn lights off");
             //tool = Instantiate(Resources.Load("Tools/" + curQuestion.text, typeof(GameObject))) as GameObject;
             edcm.StartConversation(0);
         }
@@ -76,11 +80,6 @@ public class GameManager : MonoBehaviour
         opcm.StartConversation(0);
     }  
 
-    public void SetStarLight(float brightness)
-    {
-        sixStarRender.material.SetFloat("_Fade", brightness);
-    }
-
     //handle drop event for letters
     public void dropAlphabet(Alphabet alpha)
     {
@@ -97,7 +96,7 @@ public class GameManager : MonoBehaviour
                 alpha.gameObject.layer = 2;
                 alpha.SetFire(false);
                 alpha.transform.position = new Vector3(candle.transform.position.x, candle.transform.position.y + candleOffset, candle.transform.position.z);
-                SetStarLight(sixStarRender.material.GetFloat("_Fade") + 1f/curQuestion.text.Length);
+                StartCoroutine(SetStarLight(sixStarRender.material.GetFloat("_Fade")+1f/8, starLightFadeSpeed));
                 break;
             }
         }
@@ -234,6 +233,7 @@ public class GameManager : MonoBehaviour
     {
         op = Instantiate(Resources.Load("UI/" + "Opening" + curStage.name, typeof(GameObject))) as GameObject;
         op.transform.SetParent(canvas.transform, false);
+        op.GetComponent<ConversationManager>().gm = this;
         opcm = op.GetComponent<ConversationManager>();
     }
 
@@ -241,6 +241,7 @@ public class GameManager : MonoBehaviour
     {
         ed = Instantiate(Resources.Load("UI/" + "Ending" + curStage.name, typeof(GameObject))) as GameObject;
         ed.transform.SetParent(canvas.transform, false);
+        ed.GetComponent<ConversationManager>().gm = this;
         edcm = ed.GetComponent<ConversationManager>();
     }
 
@@ -279,7 +280,39 @@ public class GameManager : MonoBehaviour
             alpha.Unlock();
             alpha.SetFire(true);            
         }
-        SetStarLight(0f);
+        StartCoroutine(SetStarLight(0f, starLightFadeSpeed));
+        TurnLight(false);
+    }
+
+    IEnumerator SetStarLight(float brightness, float fadeSpeed)
+    {   
+        if(sixStarRender.material.GetFloat("_Fade")<brightness)
+        {
+            while(sixStarRender.material.GetFloat("_Fade")<brightness)
+            {   
+                float curBright = sixStarRender.material.GetFloat("_Fade") + fadeSpeed;
+                if(curBright>brightness)
+                {
+                    curBright = brightness;
+                }
+                sixStarRender.material.SetFloat("_Fade", curBright);
+                yield return new WaitForSeconds(.1f);
+            }
+        }
+        else
+        {
+            while(sixStarRender.material.GetFloat("_Fade")>brightness)
+            {   
+                float curBright = sixStarRender.material.GetFloat("_Fade") - fadeSpeed;
+                if(curBright<brightness)
+                {
+                    curBright = brightness;
+                }
+                sixStarRender.material.SetFloat("_Fade", curBright);
+                yield return new WaitForSeconds(.1f);
+            }
+        }
+
     }
 
     // Start is called before the first frame update
@@ -304,11 +337,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        if(opcm.isEnd)
-        {
-            TurnLight(true);
-
-        }
         if(edcm.isEnd)
         {   
             Save();
