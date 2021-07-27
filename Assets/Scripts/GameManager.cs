@@ -6,7 +6,9 @@ using static DatabaseManager;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
-{
+{   
+    public bool debug = false;
+
     [SerializeField]
     private GameObject canvas;
     [SerializeField]
@@ -45,7 +47,10 @@ public class GameManager : MonoBehaviour
     {
         if(CheckSpell())
         {   
-            Answer();
+            if(!debug)
+            {
+                Answer();
+            }
             //tool = Instantiate(Resources.Load("Tools/" + curQuestion.text, typeof(GameObject))) as GameObject;
             edcm.StartConversation(0);
         }
