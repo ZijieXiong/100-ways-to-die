@@ -1837,6 +1837,7 @@ MonoBehaviour:
   lights:
   - {fileID: 1758649684}
   - {fileID: 1282919183}
+  sixStarRender: {fileID: 1172263903}
   canvas: {fileID: 366216550}
   initialAlphaX: -9.85
   intiialAlphaY: 1.9

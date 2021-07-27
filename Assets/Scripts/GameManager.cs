@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {   
     public bool debug = false;
     public GameObject[] lights;
+    public Renderer sixStarRender;
 
     [SerializeField]
     private GameObject canvas;
@@ -75,6 +76,11 @@ public class GameManager : MonoBehaviour
         opcm.StartConversation(0);
     }  
 
+    public void SetStarLight(float brightness)
+    {
+        sixStarRender.material.SetFloat("_Fade", brightness);
+    }
+
     //handle drop event for letters
     public void dropAlphabet(Alphabet alpha)
     {
@@ -91,6 +97,7 @@ public class GameManager : MonoBehaviour
                 alpha.gameObject.layer = 2;
                 alpha.SetFire(false);
                 alpha.transform.position = new Vector3(candle.transform.position.x, candle.transform.position.y + candleOffset, candle.transform.position.z);
+                SetStarLight(sixStarRender.material.GetFloat("_Fade") + 1f/curQuestion.text.Length);
                 break;
             }
         }
@@ -272,6 +279,7 @@ public class GameManager : MonoBehaviour
             alpha.Unlock();
             alpha.SetFire(true);            
         }
+        SetStarLight(0f);
     }
 
     // Start is called before the first frame update
