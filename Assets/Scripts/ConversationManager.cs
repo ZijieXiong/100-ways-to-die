@@ -8,7 +8,8 @@ public class ConversationManager : MonoBehaviour
     public Text nameText;
     public Text dialogueText;
 
-    public Animator animator;
+    public Animator[] animators;
+
 
     private Queue<Sentence> sentences;
 
@@ -44,7 +45,10 @@ public class ConversationManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
-        animator.SetBool("IsOpen", true);
+        foreach(Animator animator in animators)
+        {
+            animator.SetBool("IsOpen", true);
+        } 
 
         nameText.text = dialogue.name;
 
@@ -91,7 +95,10 @@ public class ConversationManager : MonoBehaviour
         }
         else
         {
-            animator.SetBool("IsOpen", false);
+            foreach(Animator animator in animators)
+            {
+                animator.SetBool("IsOpen", false);
+            } 
         }
     }
 
