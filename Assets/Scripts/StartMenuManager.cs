@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static DatabaseManager;
 
 public class StartMenuManager : MonoBehaviour
 {
@@ -9,7 +10,8 @@ public class StartMenuManager : MonoBehaviour
 
 
     public void GameStart()
-    {
+    {   
+        DatabaseManager.ResetDatabase();
         SceneManager.LoadScene("PlayScene");
     }
 

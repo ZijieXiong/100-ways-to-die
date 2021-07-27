@@ -263,7 +263,7 @@ public class GameManager : MonoBehaviour
         candles = GameObject.FindGameObjectsWithTag("candle");
         library = new Hashtable();
         stages = new Hashtable();
-        DatabaseManager.loadStage(stages);
+        DatabaseManager.LoadStage(stages);
         GenerateStage();
         DatabaseManager.LoadLibrary(library, fileName);
         GenerateQuestion();

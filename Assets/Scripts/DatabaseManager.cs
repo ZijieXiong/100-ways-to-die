@@ -45,10 +45,48 @@ static public class DatabaseManager
 
     static public void ResetDatabase()
     {
-
+        Hashtable stages = new Hashtable();
+        LoadStage(stages);
+        List<string> keys = new List<string>();
+        foreach(string key in stages.Keys)
+        {
+            keys.Add(key);
+        }
+        foreach(string key in keys)
+        {
+            Hashtable library = new Hashtable();
+            LoadLibrary(library, key + ".txt");
+            ResetLibrary(library);
+            SaveLibrary(library, key + ".txt");
+            stages[key] = library.Count;
+        }
+        SaveStage(stages);
     }
 
-    static public void loadStage(Hashtable stages)
+    static public void ResetLibrary(Hashtable library)
+    {   
+        List<string> keys = new List<string>();
+        foreach(string key in library.Keys)
+        {
+            keys.Add(key);
+        }    
+        foreach(string key in keys)
+        {
+            library[key] = 0;
+        }
+    }
+
+    static public int QuestionLeft(Hashtable stages)
+    {   
+        int numOfQuestion = 0;
+        foreach(string key in stages.Keys)
+        {
+            numOfQuestion += (int)stages[key];
+        }
+        return numOfQuestion;
+    }
+
+    static public void LoadStage(Hashtable stages)
     {
         string fullPath = Application.streamingAssetsPath + directory + stageFile;
 
