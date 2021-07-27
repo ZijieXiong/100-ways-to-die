@@ -56,6 +56,13 @@ public class GameManager : MonoBehaviour
     private int alphaLine = 2;
     [SerializeField]
     private int alphaToGen = 8;
+    [SerializeField]
+    private float alphaBrightnessOnClick = 5f;
+    [SerializeField]
+    private float alphaBrightnessOffClick = 0.55f;
+
+
+
     private string directory = "/SaveData/";
     private string stageFile = "Stages.txt";
     private string fileName = "";
@@ -192,6 +199,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void SetAlphaBrightness(GameObject[] letters)
+    {
+        for(int i = 0; i < 10; i++)
+        {
+            letters[i].GetComponent<Alphabet>().BrightnessOnClick = alphaBrightnessOnClick;
+            letters[i].GetComponent<Alphabet>().BrightnessOffClick = alphaBrightnessOffClick;
+        }
+    }
+
     //Load alphabet prefab
     private void LoadAlpha()
     {   
@@ -199,8 +215,13 @@ public class GameManager : MonoBehaviour
         for(int i = 0;  i < alphas.Length; i++)
         {
             letters[i] = Instantiate(Resources.Load("Alphabets/" + alphas[i].ToString(), typeof(GameObject))) as GameObject;
-            letters[i].GetComponent<Alphabet>().gm = this;
+            Alphabet letterScript = letters[i].GetComponent<Alphabet>();
+            letterScript.gm = this;
+            //letterScript.BrightnessOnClick = alphaBrightnessOnClick;
+            //letterScript.BrightnessOffClick = alphaBrightnessOffClick;
+            
         }
+        SetAlphaBrightness(letters);
         SetAlphaPos();
     }
 
