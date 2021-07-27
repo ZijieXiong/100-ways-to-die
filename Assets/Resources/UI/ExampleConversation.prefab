@@ -56,11 +56,14 @@ MonoBehaviour:
     dialogues:
     - name: Wuge
       sentences:
-      - Hello!
-      - Nice to see you.
+      - words: 
+        animationChanges: []
+      - words: 
+        animationChanges: []
     - name: Pangfu
       sentences:
-      - Fuck you!!
+      - words: 
+        animationChanges: []
 --- !u!1 &2566079304629469857
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2008480869010121998}
   - component: {fileID: 5854754067677787910}
   - component: {fileID: 7239743056479149607}
+  - component: {fileID: 2096209865314629234}
   m_Layer: 0
   m_Name: Wuge
   m_TagString: Untagged
@@ -30,7 +31,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7697990785190592040}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -75,6 +76,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &2096209865314629234
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3653434368869695785}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f952cf8f4b4c2fc46a95b80e4c295bff, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5939923956271898030
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,7 +126,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7697990785190592040}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -430,8 +450,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8458413521859315301}
-  - {fileID: 1578711721360143217}
   - {fileID: 2008480869010121998}
+  - {fileID: 1578711721360143217}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -454,7 +474,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 8458413522982518203}
   dialogueText: {fileID: 8458413523044333974}
-  animator: {fileID: 8458413521859315302}
+  animators:
+  - {fileID: 8458413521859315302}
+  - {fileID: 2096209865314629234}
+  - {fileID: 4170530531510689751}
   conversation:
     dialogues:
     - name: Wu'Ge
@@ -470,7 +493,7 @@ MonoBehaviour:
       - words: "\uFF08\u4E0D\u8FDC\u5904\uFF0CPangfu\u548CXiaohu\u671DWu'Ge\u5F84\u76F4\u51B2\u4E86\u8FC7\u6765\uFF09"
         animationChanges:
         - charName: Pangfu
-          varName: PangfuIn
+          varName: JumpIn
           varValue: 1
     - name: Pangfu
       sentences:
