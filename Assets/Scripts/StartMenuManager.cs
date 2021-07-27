@@ -10,7 +10,7 @@ public class StartMenuManager : MonoBehaviour
 
     public void GameStart()
     {
-        SceneManager.LoadScene("Scene 1");
+        SceneManager.LoadScene("PlayScene");
     }
 
     // Start is called before the first frame update

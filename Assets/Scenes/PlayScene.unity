@@ -1801,6 +1801,8 @@ MonoBehaviour:
   candleOffset: 0.2
   alphaLine: 2
   alphaToGen: 10
+  alphaBrightnessOnClick: 2
+  alphaBrightnessOffClick: 0.55
 --- !u!4 &1111765915
 Transform:
   m_ObjectHideFlags: 0
