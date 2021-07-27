@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
 
     public void Cancel()
     {
+        TurnLight(false);
         Reset();
     }
     
@@ -281,7 +282,6 @@ public class GameManager : MonoBehaviour
             alpha.SetFire(true);            
         }
         StartCoroutine(SetStarLight(0f, starLightFadeSpeed));
-        TurnLight(false);
     }
 
     IEnumerator SetStarLight(float brightness, float fadeSpeed)
