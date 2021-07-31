@@ -9,7 +9,7 @@ using System.Threading;
 public class GameManager : MonoBehaviour
 {   
     public bool debug = false;
-    public GameObject[] lights;
+    public GameObject[] ObjectsDisabledOnStory;
     public Renderer sixStarRender;
 
     [SerializeField]
@@ -59,8 +59,6 @@ public class GameManager : MonoBehaviour
                 Answer();
             }
             TurnLight(false);
-            Debug.Log("turn lights off");
-            //tool = Instantiate(Resources.Load("Tools/" + curQuestion.text, typeof(GameObject))) as GameObject;
             edcm.StartConversation(0);
         }
         else
@@ -104,11 +102,11 @@ public class GameManager : MonoBehaviour
 
     public void TurnLight(bool isOn)
     {
-        foreach(GameObject light in lights)
+        foreach(GameObject light in ObjectsDisabledOnStory)
         {
             light.SetActive(isOn);
         }
-        foreach(GameObject letter in letters)
+        foreach(GameObject letter in ObjectsDisabledOnStory)
         {
             letter.SetActive(isOn);
         }
