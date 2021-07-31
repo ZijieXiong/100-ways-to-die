@@ -71,7 +71,6 @@ public class GameManager : MonoBehaviour
 
     public void Cancel()
     {
-        TurnLight(false);
         Reset();
     }
     
@@ -340,7 +339,15 @@ public class GameManager : MonoBehaviour
         if(edcm.isEnd)
         {   
             Save();
-            SceneManager.LoadScene("PlayScene");
+            if(DatabaseManager.QuestionLeft(stages) <= 0)
+            {
+                
+            }
+            else
+            {
+                SceneManager.LoadScene("PlayScene");
+            }
+
         }
     }
 }

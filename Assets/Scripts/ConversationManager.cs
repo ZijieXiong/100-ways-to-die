@@ -99,8 +99,11 @@ public class ConversationManager : MonoBehaviour
             foreach(Animator animator in animators)
             {
                 animator.SetBool("IsOpen", false);
-            } 
-            gm.TurnLight(true);
+            }
+            if(gm!=null)
+            {
+                gm.TurnLight(true);
+            }
             isEnd = true;
         }
     }
