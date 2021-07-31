@@ -1911,9 +1911,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 1
-  lights:
+  ObjectsDisabledOnStory:
   - {fileID: 1758649684}
   - {fileID: 1282919183}
+  - {fileID: 921463512}
   sixStarRender: {fileID: 1172263903}
   canvas: {fileID: 366216550}
   initialAlphaX: -9.85
