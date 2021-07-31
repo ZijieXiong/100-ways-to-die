@@ -1191,7 +1191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1854148838}
   m_Layer: 0
-  m_Name: Auido
+  m_Name: Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2404,7 +2404,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7617652300521980831
 RectTransform:
   m_ObjectHideFlags: 0
