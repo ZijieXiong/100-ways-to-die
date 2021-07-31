@@ -239,7 +239,7 @@ public class GameManager : MonoBehaviour
 
     private void LoadED()
     {
-        ed = Instantiate(Resources.Load("UI/" + "Ending" + curStage.name, typeof(GameObject))) as GameObject;
+        ed = Instantiate(Resources.Load("UI/" + "Ending" + curStage.name + curQuestion.text, typeof(GameObject))) as GameObject;
         ed.transform.SetParent(canvas.transform, false);
         ed.GetComponent<ConversationManager>().gm = this;
         edcm = ed.GetComponent<ConversationManager>();
