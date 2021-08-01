@@ -11,13 +11,14 @@ public class StartMenuManager : MonoBehaviour
     public AudioSource bgm;
     public AudioSource newGame;
     public AudioSource continueButton;
+    public AudioSource storyBGM;
 
     public void NewGame()
     {
         DatabaseManager.ResetDatabase();
         newGame.Play();
         bgm.Stop();
-        cm.StartConversation(0);
+        Invoke("StartStory", 1);
     }
 
     public void Continue()
@@ -41,15 +42,18 @@ public class StartMenuManager : MonoBehaviour
     {
         
     }
-
-
+    void StartStory()
+    {
+        cm.StartConversation(0);
+        storyBGM.Play();
+    }
 
     // Update is called once per frame
     void Update()
     {
         if(cm.isEnd)
         {
-            GameStart();
+            Invoke("GameStart", 1);
         }
     }
 }
