@@ -47,9 +47,8 @@ public class GameManager : MonoBehaviour
     private GameObject tool;
     private ConversationManager opcm;
     private ConversationManager edcm;
+    private int alphaInCandle = 0;
 
-
-    
     public void Combine()
     {
         if(CheckSpell())
@@ -94,7 +93,9 @@ public class GameManager : MonoBehaviour
                 alpha.gameObject.layer = 2;
                 alpha.SetFire(false);
                 alpha.transform.position = new Vector3(candle.transform.position.x, candle.transform.position.y + candleOffset, candle.transform.position.z);
-                StartCoroutine(SetStarLight(sixStarRender.material.GetFloat("_Fade")+1f/8, starLightFadeSpeed));
+                alphaInCandle += 1;
+                StopAllCoroutines();
+                StartCoroutine(SetStarLight(alphaInCandle*1f/8, starLightFadeSpeed));
                 break;
             }
         }
@@ -278,6 +279,8 @@ public class GameManager : MonoBehaviour
             alpha.Unlock();
             alpha.SetFire(true);            
         }
+        alphaInCandle = 0;
+        StopAllCoroutines();
         StartCoroutine(SetStarLight(0f, starLightFadeSpeed));
     }
 
@@ -309,7 +312,6 @@ public class GameManager : MonoBehaviour
                 yield return new WaitForSeconds(.1f);
             }
         }
-
     }
 
     // Start is called before the first frame update

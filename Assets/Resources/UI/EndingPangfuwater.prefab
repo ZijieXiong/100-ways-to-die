@@ -311,10 +311,7 @@ MonoBehaviour:
     - name: 
       sentences:
       - words: "\u6210\u529F\u5236\u4F5C\u4E86\u6C34\uFF01"
-        animationChanges:
-        - charName: Wuge
-          varName: closedwhentoolbeingdone
-          varValue: 1
+        animationChanges: []
     - name: Wu'Ge
       sentences:
       - words: "\uFF08\u90A3\u4E00\u77AC\u95F4\uFF0C\u4E00\u80A1\u6765\u81EA\u4E1C\u65B9\u7684\u795E\u79D8\u529B\u91CF\u7A7F\u8FC7\u4E86Wu'Ge\u7684\u5927\u8111\u2014\u2014\u5982\u679C\u4ED6\u6709\u7684\u8BDD\uFF09"
@@ -327,7 +324,7 @@ MonoBehaviour:
           varValue: 1
         - charName: Wuge
           varName: closedwhentoolbeingdone
-          varValue: 0
+          varValue: 1
       - words: "\uFF08Wu'Ge\u5C0F\u5C0F\u7684\u8111\u888B\u74DC\uFF0C\u4F3C\u4E4E\u662F\u65E0\u6CD5\u627F\u53D7\u8FD9\u80A1\u5F3A\u5927\u7684\u529B\u91CF\u4E00\u822C\uFF0C\u4F7F\u4ED6\u7684\u773C\u795E\u53D8\u5F97\u5446\u6EDE\u2014\u2014\u5F53\u7136\uFF0C\u4E5F\u53EF\u80FD\u662F\u4ED6\u88C5\u7684\uFF09"
         animationChanges: []
       - words: "\uFF08\u603B\u4E4B\uFF0CWu'Ge\u542C\u5230\u4E86\u4E00\u4E2A\u58F0\u97F3\u2026\u2026\uFF09"
@@ -696,7 +693,7 @@ Animator:
   m_GameObject: {fileID: 1935998847009822448}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f952cf8f4b4c2fc46a95b80e4c295bff, type: 2}
+  m_Controller: {fileID: 9100000, guid: 890748a59826baa48a1449a9221558eb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
