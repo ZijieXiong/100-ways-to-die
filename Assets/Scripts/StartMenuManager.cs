@@ -12,6 +12,7 @@ public class StartMenuManager : MonoBehaviour
     public AudioSource newGame;
     public AudioSource continueButton;
     public AudioSource storyBGM;
+    public GameObject buttons;
 
     public void NewGame()
     {
@@ -24,7 +25,9 @@ public class StartMenuManager : MonoBehaviour
     public void Continue()
     {   
         continueButton.Play();
+        bgm.Stop();
         Invoke("GameStart", 1);
+        storyBGM.PlayDelayed(1);
     }
 
     public void Quit()
@@ -32,7 +35,7 @@ public class StartMenuManager : MonoBehaviour
         Application.Quit();
     }
 
-    private void GameStart()
+    void GameStart()
     {
         SceneManager.LoadScene("PlayScene");
     }
@@ -46,6 +49,7 @@ public class StartMenuManager : MonoBehaviour
     {
         cm.StartConversation(0);
         storyBGM.Play();
+        buttons.SetActive(false);
     }
 
     // Update is called once per frame

@@ -12,6 +12,9 @@ public class ConversationManager : MonoBehaviour
     public Animator[] animators;
     public Conversation conversation;   
     private Queue<Sentence> sentences;
+    private bool isStart = true;
+
+    public AudioSource button;
 
     
     
@@ -25,6 +28,11 @@ public class ConversationManager : MonoBehaviour
         isEnd = false;
     }
 
+    public void SetIsStart(bool val)
+    {
+        isStart = val;
+    }
+    
     public void StartConversation(int startInd)
     {
         if(startInd >= 0 && startInd < conversation.dialogues.Length)
@@ -70,6 +78,14 @@ public class ConversationManager : MonoBehaviour
             EndDialogue();
             return;
         }
+        if(!isStart)
+        {
+            button.Play();
+        }
+        else
+        {
+            isStart = false;
+        }
 
         Sentence sentence = sentences.Dequeue();
         ChangeAnimation(sentence.animationChanges);
@@ -103,6 +119,7 @@ public class ConversationManager : MonoBehaviour
             if(gm!=null)
             {
                 gm.TurnLight(true);
+                gm.StopStoryBGM();
             }
             isEnd = true;
         }

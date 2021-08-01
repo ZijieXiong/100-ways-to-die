@@ -11,6 +11,12 @@ public class GameManager : MonoBehaviour
     public bool debug = false;
     public GameObject[] ObjectsDisabledOnStory;
     public Renderer sixStarRender;
+    public AudioSource flame;
+    public AudioSource bgm;
+    public AudioSource button;
+    public AudioSource surround;
+    public AudioSource magic;
+    public AudioSource storyBGM;
 
     [SerializeField]
     private GameObject canvas;
@@ -50,7 +56,8 @@ public class GameManager : MonoBehaviour
     private int alphaInCandle = 0;
 
     public void Combine()
-    {
+    {   
+        button.Play();
         if(CheckSpell())
         {   
             if(!debug)
@@ -59,6 +66,8 @@ public class GameManager : MonoBehaviour
             }
             TurnLight(false);
             edcm.StartConversation(0);
+            magic.Play();
+            Invoke("StartStoryBGM", 3);
         }
         else
         {
@@ -67,13 +76,16 @@ public class GameManager : MonoBehaviour
     }
 
     public void Cancel()
-    {
+    {   
+        button.Play();
         Reset();
     }
     
     public void Story()
     {   
+        button.Play();
         TurnLight(false);
+        opcm.SetIsStart(true);
         opcm.StartConversation(0);
     }  
 
@@ -85,6 +97,7 @@ public class GameManager : MonoBehaviour
             Candle candleScript = candle.GetComponent<Candle>();
             if(alpha.boxcollider.bounds.Intersects(candle.GetComponent<BoxCollider2D>().bounds) && !candleScript.isLock)
             {
+                flame.Play();
                 candleScript.letter = alpha.GetLetter();
                 candleScript.isLock = true;
                 GameObject child = candle.transform.GetChild(0).gameObject;
@@ -111,6 +124,17 @@ public class GameManager : MonoBehaviour
         {
             letter.SetActive(isOn);
         }
+    }
+
+    public void StopStoryBGM()
+    {
+
+        storyBGM.Stop();
+    }
+
+    public void StartStoryBGM()
+    {
+        storyBGM.Play();
     }
 
     //randomly generate a stage that has question left to answer
@@ -330,6 +354,7 @@ public class GameManager : MonoBehaviour
         LoadED();
         opcm.StartConversation(0);
         TurnLight(false);
+        storyBGM = GameObject.Find("StoryBGM").GetComponent<AudioSource>();
         
     }
 
