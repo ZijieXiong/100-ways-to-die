@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public AudioSource surround;
     public AudioSource magic;
     public AudioSource storyBGM;
+    public Animator stageClearAnimator;
 
     [SerializeField]
     private GameObject canvas;
@@ -357,6 +358,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void NextLevel()
+    {
+        if(DatabaseManager.QuestionLeft(stages) <= 0)
+        {
+            DatabaseManager.ResetDatabase();
+            SceneManager.LoadScene("GameOver");
+        }
+        else
+        {
+
+            SceneManager.LoadScene("PlayScene");
+        }
+    }
+
     void Awake()
     {
         storyBGM = GameObject.Find("StoryBGM").GetComponent<AudioSource>();
@@ -404,15 +419,8 @@ public class GameManager : MonoBehaviour
         if(edcm.isEnd)
         {   
             Save();
-            if(DatabaseManager.QuestionLeft(stages) <= 0)
-            {
-                
-            }
-            else
-            {
-
-                SceneManager.LoadScene("PlayScene");
-            }
+            stageClearAnimator.SetBool("Appear", true);
+            Invoke("NextLevel", 1);
 
         }
     }

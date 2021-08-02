@@ -2560,6 +2560,7 @@ MonoBehaviour:
   surround: {fileID: 990406818}
   magic: {fileID: 1207860908}
   storyBGM: {fileID: 838095567}
+  stageClearAnimator: {fileID: 1592070059}
   canvas: {fileID: 366216550}
   initialAlphaX: -9.85
   intiialAlphaY: 1.9

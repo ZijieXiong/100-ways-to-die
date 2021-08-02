@@ -61,7 +61,7 @@ public class StartMenuManager : MonoBehaviour
     {
         if(cm.isEnd)
         {
-            Invoke("GameStart", 1);
+            GameStart();
         }
     }
 }
