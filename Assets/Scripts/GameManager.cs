@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
             TurnLight(false);
             edcm.StartConversation(0);
             magic.Play();
-            Invoke("StartStoryBGM", 3);
+            Invoke("StartStoryBGM", 2);
         }
         else
         {
@@ -126,10 +126,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void StopStoryBGM()
+    public void StopStoryBGM(ConversationManager cm)
     {
-
-        storyBGM.Stop();
+        if(cm.gameObject.name == opcm.gameObject.name)
+        {
+            storyBGM.Stop();
+        }
     }
 
     public void StartStoryBGM()
@@ -338,6 +340,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Awake()
+    {
+        storyBGM = GameObject.Find("StoryBGM").GetComponent<AudioSource>();
+        if(!storyBGM.isPlaying)
+        {
+            storyBGM.Play();
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {   
@@ -354,7 +365,6 @@ public class GameManager : MonoBehaviour
         LoadED();
         opcm.StartConversation(0);
         TurnLight(false);
-        storyBGM = GameObject.Find("StoryBGM").GetComponent<AudioSource>();
         
     }
 
@@ -370,6 +380,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+
                 SceneManager.LoadScene("PlayScene");
             }
 

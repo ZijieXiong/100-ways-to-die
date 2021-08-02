@@ -12,8 +12,11 @@ public class BGM : MonoBehaviour
         }
         else if(s != this){
             Destroy(gameObject);
+            Debug.Log(gameObject.name);
+            return;
         }
-        DontDestroyOnLoad(gameObject);
+        Debug.Log("Dont destroy" + s.gameObject.name);
+        DontDestroyOnLoad(s.gameObject);
     }
     // Start is called before the first frame update
     void Start()
