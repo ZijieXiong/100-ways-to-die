@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public AudioSource magic;
     public AudioSource storyBGM;
     public Animator stageClearAnimator;
+    public Animator fade;
 
     [SerializeField]
     private GameObject canvas;
@@ -397,6 +398,7 @@ public class GameManager : MonoBehaviour
         LoadED();
         opcm.StartConversation(0);
         TurnLight(false);
+        fade.SetBool("IsMasked", false);
         
     }
 

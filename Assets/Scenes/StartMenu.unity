@@ -1106,6 +1106,7 @@ MonoBehaviour:
   continueButton: {fileID: 1830568729}
   storyBGM: {fileID: 876081671}
   buttons: {fileID: 356161340}
+  fade: {fileID: 1820358466}
 --- !u!4 &1569847410
 Transform:
   m_ObjectHideFlags: 0
@@ -1347,6 +1348,11 @@ PrefabInstance:
 --- !u!224 &1820358465 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2205017787214087475, guid: 3ba15c274ddd9a643842dd85f861d22d, type: 3}
+  m_PrefabInstance: {fileID: 1820358464}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1820358466 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2205017787214087478, guid: 3ba15c274ddd9a643842dd85f861d22d, type: 3}
   m_PrefabInstance: {fileID: 1820358464}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1830568727

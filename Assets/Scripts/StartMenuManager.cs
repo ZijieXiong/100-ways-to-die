@@ -13,6 +13,7 @@ public class StartMenuManager : MonoBehaviour
     public AudioSource continueButton;
     public AudioSource storyBGM;
     public GameObject buttons;
+    public Animator fade;
 
     public void NewGame()
     {
@@ -26,6 +27,7 @@ public class StartMenuManager : MonoBehaviour
     {   
         continueButton.Play();
         bgm.Stop();
+        fade.SetBool("IsMasked", true);
         Invoke("GameStart", 1);
         storyBGM.PlayDelayed(1);
     }
@@ -47,7 +49,7 @@ public class StartMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        fade.SetBool("IsMasked", false);
     }
     void StartStory()
     {
@@ -60,8 +62,9 @@ public class StartMenuManager : MonoBehaviour
     void Update()
     {
         if(cm.isEnd)
-        {
-            GameStart();
+        {   
+            fade.SetBool("IsMasked", true);
+            Invoke("GameStart", 1);
         }
     }
 }
