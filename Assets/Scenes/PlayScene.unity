@@ -3570,6 +3570,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 366216554}
     m_Modifications:
+    - target: {fileID: 2205017787214087472, guid: 3ba15c274ddd9a643842dd85f861d22d, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2205017787214087474, guid: 3ba15c274ddd9a643842dd85f861d22d, type: 3}
       propertyPath: m_Name
       value: FadeInFadeOut
