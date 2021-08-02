@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 {   
     public bool debug = false;
     public GameObject[] ObjectsDisabledOnStory;
+    public GameObject pauseMenu;
     public Renderer sixStarRender;
     public AudioSource flame;
     public AudioSource bgm;
@@ -137,6 +138,22 @@ public class GameManager : MonoBehaviour
     public void StartStoryBGM()
     {
         storyBGM.Play();
+    }
+
+    public void ReturnMain()
+    {
+        storyBGM.Stop();
+        SceneManager.LoadScene("StartMenu");
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    public void Continue()
+    {
+        pauseMenu.SetActive(false);
     }
 
     //randomly generate a stage that has question left to answer
@@ -371,6 +388,19 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {   
+            if(pauseMenu.activeInHierarchy)
+            {
+                pauseMenu.SetActive(false);
+            }
+            else
+            {
+                pauseMenu.SetActive(true);
+            }
+
+        }
+
         if(edcm.isEnd)
         {   
             Save();

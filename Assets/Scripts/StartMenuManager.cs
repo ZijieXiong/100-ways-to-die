@@ -40,6 +40,10 @@ public class StartMenuManager : MonoBehaviour
         SceneManager.LoadScene("PlayScene");
     }
 
+    void Awake()
+    {
+        storyBGM = GameObject.Find("StoryBGM").GetComponent<AudioSource>();
+    }
     // Start is called before the first frame update
     void Start()
     {
