@@ -2553,7 +2553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 578f3fd45152adc488fd31f958edb603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 1
+  debug: 0
   ObjectsDisabledOnStory:
   - {fileID: 1758649684}
   - {fileID: 1282919183}
