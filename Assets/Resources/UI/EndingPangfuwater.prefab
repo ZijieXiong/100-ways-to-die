@@ -372,11 +372,13 @@ MonoBehaviour:
         animationChanges: []
     - name: 
       sentences:
-      - words: "\uFF08\uFF01\u76EE\u6807\u8FBE\u6210\uFF01\uFF09"
+      - words: "\uFF08\u203B\u76EE\u6807\u8FBE\u6210\u203B\uFF09"
         animationChanges:
         - charName: EndingCurtain
           varName: TurnToDarkness
           varValue: 1
+      - words: "\uFF08\u70B9\u51FB\u201CCONTINUE\u201D\u8FDB\u5165\u4E0B\u4E00\u5173\u2192\uFF09"
+        animationChanges: []
   button: {fileID: 7143659907926981}
 --- !u!82 &7143659907926981
 AudioSource:
