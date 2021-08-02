@@ -119,7 +119,7 @@ public class ConversationManager : MonoBehaviour
             if(gm!=null)
             {
                 gm.TurnLight(true);
-                gm.StopStoryBGM();
+                gm.StopStoryBGM(this);
             }
             isEnd = true;
         }
