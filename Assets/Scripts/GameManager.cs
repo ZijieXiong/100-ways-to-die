@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
         button.Play();
         TurnLight(false);
         opcm.SetIsStart(true);
+        storyBGM.Play();
         opcm.StartConversation(0);
     }  
 
@@ -299,8 +300,12 @@ public class GameManager : MonoBehaviour
     private bool CheckSpell()
     {   
         string answer = "";
-        foreach(GameObject candle in candles)
-        {
+        GameObject candleSet = GameObject.Find("Candles");
+
+        for(int i = 1; i < 9; i++)
+        {   
+            
+            GameObject candle = candleSet.transform.Find("Candle" + i.ToString()).gameObject;
             answer += candle.GetComponent<Candle>().letter; 
         }
         return (answer == curQuestion.text);
