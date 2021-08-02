@@ -373,6 +373,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void FadeOut()
+    {
+        fade.SetBool("IsMasked", true);
+    }
+
     void Awake()
     {
         storyBGM = GameObject.Find("StoryBGM").GetComponent<AudioSource>();
@@ -422,7 +427,8 @@ public class GameManager : MonoBehaviour
         {   
             Save();
             stageClearAnimator.SetBool("Appear", true);
-            Invoke("NextLevel", 1);
+            Invoke("FadeOut", 1);
+            Invoke("NextLevel", 2);
 
         }
     }

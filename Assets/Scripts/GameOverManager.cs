@@ -7,15 +7,27 @@ public class GameOverManager : MonoBehaviour
 {   
     public ConversationManager cm;
     public AudioSource storyBGM;
+    public Animator fade;
+
+    void ReturnMain()
+    {
+        SceneManager.LoadScene("StartMenu");
+        storyBGM.Stop();
+    }
 
     void Awake()
     {
         storyBGM = GameObject.Find("StoryBGM").GetComponent<AudioSource>();
+        if(!storyBGM.isPlaying)
+        {
+            storyBGM.Play();
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        fade.SetBool("IsMasked", false);
         cm.StartConversation(0);
     }
 
@@ -24,8 +36,8 @@ public class GameOverManager : MonoBehaviour
     {
         if(cm.isEnd)
         {   
-            storyBGM.Stop();
-            SceneManager.LoadScene("StartMenu");
+            fade.SetBool("IsMasked", true);
+            Invoke("ReturnMain", 1);
         }
     }
 }

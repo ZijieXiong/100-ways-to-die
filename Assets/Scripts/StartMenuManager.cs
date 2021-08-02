@@ -20,6 +20,8 @@ public class StartMenuManager : MonoBehaviour
         DatabaseManager.ResetDatabase();
         newGame.Play();
         bgm.Stop();
+        fade.SetBool("IsMasked", true);
+        Invoke("FadeIn", 2);
         Invoke("StartStory", 1);
     }
 
@@ -42,6 +44,11 @@ public class StartMenuManager : MonoBehaviour
         SceneManager.LoadScene("PlayScene");
     }
 
+    void FadeIn()
+    {
+        fade.SetBool("IsMasked", false);
+    }
+
     void Awake()
     {
         storyBGM = GameObject.Find("StoryBGM").GetComponent<AudioSource>();
@@ -51,6 +58,7 @@ public class StartMenuManager : MonoBehaviour
     {
         fade.SetBool("IsMasked", false);
     }
+
     void StartStory()
     {
         cm.StartConversation(0);
