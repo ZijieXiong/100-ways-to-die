@@ -24,7 +24,6 @@ public class ConversationManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sentences = new Queue<Sentence>();
         isEnd = false;
     }
 
@@ -62,7 +61,6 @@ public class ConversationManager : MonoBehaviour
         nameText.text = dialogue.name;
 
         sentences = new Queue<Sentence>();
-
         foreach (Sentence sentence in dialogue.sentences)
         {
             sentences.Enqueue(sentence);
@@ -72,7 +70,7 @@ public class ConversationManager : MonoBehaviour
     }
 
     public void DisplayNextSentence()
-    {
+    {   
         if (sentences.Count == 0)
         {
             EndDialogue();
@@ -88,6 +86,7 @@ public class ConversationManager : MonoBehaviour
         }
 
         Sentence sentence = sentences.Dequeue();
+
         ChangeAnimation(sentence.animationChanges);
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence.words));
@@ -138,5 +137,9 @@ public class ConversationManager : MonoBehaviour
            
 
         }
+    }
+
+    void Update()
+    {
     }
 }
