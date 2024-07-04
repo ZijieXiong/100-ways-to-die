@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using static System.Math;
-using UnityEngine.Experimental.Rendering.Universal;
+
 
 public class Alphabet : MonoBehaviour
 {
@@ -53,7 +53,7 @@ public class Alphabet : MonoBehaviour
     {
         GameObject light2D = fire.transform.GetChild(0).gameObject;
         //Debug.Log(light2D.name);
-        Light2D light = light2D.GetComponent<Light2D>();
+        UnityEngine.Rendering.Universal.Light2D light = light2D.GetComponent<UnityEngine.Rendering.Universal.Light2D>();
         light.intensity = brightness;
     }
 
